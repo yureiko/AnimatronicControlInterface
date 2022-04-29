@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>mainview.qml</file>
+        <file>CustomJoystick.qml</file>
+        <file>CustomToolbar.qml</file>
+    </qresource>
+</RCC>

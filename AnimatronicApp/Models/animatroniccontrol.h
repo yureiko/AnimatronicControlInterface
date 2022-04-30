@@ -5,6 +5,7 @@
 #include "Controllers/joystickcontroller.h"
 #include "Controllers/toolbarcontroller.h"
 #include "Threads/communicationthread.h"
+#include "eyescontrol.h"
 
 class AnimatronicControl : public QObject
 {
@@ -13,20 +14,20 @@ public:
     explicit AnimatronicControl(QObject *parent = nullptr);
 
     JoystickController *joystickController() const;
-    void setJoystickController(JoystickController *newJoystickController);
 
     ToolBarController *toolBarController() const;
-    void setToolBarController(ToolBarController *newToolBarController);
-
-    void setConnections();
 
 signals:
 
 private:
 
+    void sendEyesPosition(QPointF eyesPosition);
+
     CommunicationThread *m_communicationThread;
     JoystickController *m_joystickController;
     ToolBarController *m_toolBarController;
+
+    EyesControl *m_eyesControl;
 
 };
 

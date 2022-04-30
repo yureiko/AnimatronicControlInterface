@@ -3,6 +3,7 @@ QT += qml scxml serialport
 CONFIG += c++11
 
 RESOURCES += \
+    animatronic-images.qrc \
     animatronic-qml.qrc
 
 HEADERS += \

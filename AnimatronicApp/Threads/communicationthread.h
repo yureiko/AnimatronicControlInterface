@@ -4,6 +4,7 @@
 #include <QThread>
 #include <QSerialPort>
 #include <QObject>
+#include <QByteArray>
 
 class CommunicationThread : public QThread
 {
@@ -12,6 +13,8 @@ public:
     explicit CommunicationThread(QObject *parent = nullptr);
 
     void run() override;
+
+    void sendData(QByteArray data);
 
 public slots:
     void openSerialPort(QString portName);
@@ -24,6 +27,8 @@ signals:
 
 private:
     QSerialPort *m_serialPort;
+    QVector<QByteArray> m_dataOut;
+    bool m_quit;
 };
 
 #endif // COMMUNICATIONTHREAD_H

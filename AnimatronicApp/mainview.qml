@@ -20,11 +20,23 @@ Window {
         }
 
         CustomJoystick {
-            id: joystick
-            backgroundColor: "orange"
+            id: eyeJoystickLeft
+            controller: joystickController
+            backgroundColor: "white"
             xPos: 40
             yPos: 80
             size: parent.width/5
+            cursorImage: "qrc:/Resources/iris.png"
+        }
+
+        CustomJoystick {
+            id: eyeJoystickRight
+            controller: joystickController
+            backgroundColor: "white"
+            xPos: 40 + eyeJoystickLeft.size + 20
+            yPos: eyeJoystickLeft.yPos
+            size: eyeJoystickLeft.size
+            cursorImage: "qrc:/Resources/iris.png"
         }
     }
 }

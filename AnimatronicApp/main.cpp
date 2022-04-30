@@ -5,7 +5,6 @@
 #include "Controllers/joystickcontroller.h"
 #include "Controllers/toolbarcontroller.h"
 
-
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -14,21 +13,18 @@ int main(int argc, char *argv[])
                                          "JoystickController");
     qmlRegisterType<ToolBarController>("controllers", 1, 0,
                                          "ToolBarController");
-
+    // Creates root class
     AnimatronicControl animatronicControl;
 
-    ToolBarController *toolBarController = new ToolBarController();
-    JoystickController *joystickController = new JoystickController();
-
-    animatronicControl.setToolBarController(toolBarController);
-    animatronicControl.setJoystickController(joystickController);
-    animatronicControl.setConnections();
+    // Brings controllers references to main context
+    ToolBarController *toolBarController = animatronicControl.toolBarController();
+    JoystickController *joystickController = animatronicControl.joystickController();
 
     QQmlApplicationEngine engine;
 
+    // Injects controllers context into qml side
     engine.rootContext()->setContextProperty(QStringLiteral("joystickController"), joystickController);
     engine.rootContext()->setContextProperty(QStringLiteral("toolbarController"), toolBarController);
-
 
     engine.load(QUrl(QStringLiteral("qrc:/mainview.qml")));
     if (engine.rootObjects().isEmpty())

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Resources/iris.png</file>
+    </qresource>
+</RCC>

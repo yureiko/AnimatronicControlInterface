@@ -2,6 +2,7 @@
 #define EYESCONTROL_H
 
 #include <QObject>
+#include <QPointF>
 
 class EyesControl : public QObject
 {
@@ -9,8 +10,16 @@ class EyesControl : public QObject
 public:
     explicit EyesControl(QObject *parent = nullptr);
 
-signals:
+    QPointF positionDegrees() const;
 
+public slots:
+    void setPositionDegrees(QPointF newPosition);
+
+signals:
+    void positionDegreesChanged(QPointF posiitonDegrees);
+
+private:
+    QPointF m_positionDegrees;
 };
 
 #endif // EYESCONTROL_H

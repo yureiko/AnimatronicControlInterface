@@ -1,4 +1,5 @@
 #include "communicationthread.h"
+#include <QDebug>
 
 #define DATA_START_MESSAGE_FLAG 0xAA
 #define DATA_END_MESSAGE_FLAG 0x55
@@ -24,9 +25,13 @@ void CommunicationThread::run()
         if(!m_dataOut.isEmpty() && m_serialPort->isWritable())
         {
             QByteArray dataSend = m_dataOut.first();
-            m_dataOut.removeFirst();
+
             m_serialPort->write(dataSend);
             m_serialPort->waitForBytesWritten(-1);
+
+            m_dataOut.removeFirst();
+
+            qDebug() << dataSend;
         }
     }
 }

@@ -7,15 +7,19 @@ RESOURCES += \
     animatronic-qml.qrc
 
 HEADERS += \
+    Controllers/slidercontroller.h \
     Controllers/toolbarcontroller.h \
     Models/animatroniccontrol.h \
+    Models/eyelidscontrol.h \
     Models/eyescontrol.h \
     Threads/communicationthread.h \
     Controllers/joystickcontroller.h
 
 SOURCES += \
+    Controllers/slidercontroller.cpp \
     Controllers/toolbarcontroller.cpp \
     Models/animatroniccontrol.cpp \
+    Models/eyelidscontrol.cpp \
     Models/eyescontrol.cpp \
     Threads/communicationthread.cpp \
     Controllers/joystickcontroller.cpp \

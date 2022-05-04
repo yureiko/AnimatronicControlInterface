@@ -7,7 +7,7 @@
 #define VERTICAL_MIN_DEG_VALUE 45
 
 EyesControl::EyesControl(QObject *parent)
-    : QObject{parent}
+    : QObject(parent)
 {
 
 }

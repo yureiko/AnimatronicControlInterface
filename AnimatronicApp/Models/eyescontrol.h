@@ -16,7 +16,7 @@ public slots:
     void setPositionDegrees(QPointF newPosition);
 
 signals:
-    void positionDegreesChanged(QPointF posiitonDegrees);
+    void positionDegreesChanged(QPointF positionDegrees);
 
 private:
     QPointF m_positionDegrees;

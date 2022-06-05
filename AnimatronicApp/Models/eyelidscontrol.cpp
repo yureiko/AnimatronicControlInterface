@@ -31,8 +31,8 @@ void EyelidsControl::setPositionCenterYOffsetDegrees(float yOffset)
     m_positionCenterOffsetDegrees =  {(((yOffset + 1.f)/2.f) * (SUPERIOR_MAX_DEG_VALUE - SUPERIOR_MIN_DEG_VALUE)) + SUPERIOR_MIN_DEG_VALUE,
                   (((yOffset + 1.f)/2.f) * (INFERIOR_MAX_DEG_VALUE - INFERIOR_MIN_DEG_VALUE)) + INFERIOR_MIN_DEG_VALUE};
 
-    QPair<float,float> outputPosition = {m_positionDegrees.first + 0.5f*m_positionCenterOffsetDegrees.first,
-                                         m_positionDegrees.second - 0.5f*m_positionCenterOffsetDegrees.second};
+    QPair<float,float> outputPosition = {m_positionDegrees.first + 0.1f*m_positionCenterOffsetDegrees.first,
+                                         m_positionDegrees.second - 0.1f*m_positionCenterOffsetDegrees.second};
 
     emit positionDegreesChanged(outputPosition);
 }

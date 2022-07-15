@@ -3,5 +3,6 @@
         <file>mainview.qml</file>
         <file>CustomJoystick.qml</file>
         <file>CustomToolbar.qml</file>
+        <file>CustomLever.qml</file>
     </qresource>
 </RCC>

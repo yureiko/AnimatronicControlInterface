@@ -26,7 +26,7 @@ Window {
             backgroundColor: "white"
             anchors{
                 top: toolbar.bottom
-                topMargin: 40
+                topMargin: 60
                 left: background.left
                 leftMargin: 40
 
@@ -63,6 +63,35 @@ Window {
             }
             stepSize: 0.01
             onMoved: sliderController.onPositionChanged(position)
+        }
+
+        CustomLever {
+            id: eyeBrowLeft
+            anchors{
+                left: eyeJoystickLeft.left
+                bottom: eyeJoystickLeft.top
+                bottomMargin: eyeJoystickLeft.size/10
+            }
+
+            controller: leverController
+            rotationPoint: Item.Left
+            height: eyeJoystickLeft.size/8
+            width: eyeJoystickLeft.width
+        }
+
+        CustomLever {
+            id: eyeBrowRight
+            anchors{
+                right: eyeJoystickRight.right
+                bottom: eyeJoystickRight.top
+                bottomMargin: eyeJoystickRight.size/10
+            }
+
+            controller: leverController
+            rotationPoint: Item.Right
+            antiClockWiseRotation: true
+            height: eyeJoystickRight.size/8
+            width: eyeJoystickLeft.width
         }
     }
 }

@@ -5,6 +5,7 @@
 #include "Controllers/joystickcontroller.h"
 #include "Controllers/toolbarcontroller.h"
 #include "Controllers/slidercontroller.h"
+#include "Controllers/levercontroller.h"
 #include "Threads/communicationthread.h"
 #include "eyescontrol.h"
 #include "eyelidscontrol.h"
@@ -21,6 +22,8 @@ public:
 
     SliderController *sliderController() const;
 
+    LeverController *leverController() const;
+
 signals:
 
 private:
@@ -32,6 +35,7 @@ private:
     JoystickController *m_joystickController;
     ToolBarController *m_toolBarController;
     SliderController *m_sliderController;
+    LeverController *m_leverController;
 
     EyesControl *m_eyesControl;
     EyelidsControl *m_eyelidsControl;

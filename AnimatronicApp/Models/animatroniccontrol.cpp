@@ -9,6 +9,7 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
       m_joystickController(new JoystickController(this)),
       m_toolBarController(new ToolBarController(this)),
       m_sliderController(new SliderController(this)),
+      m_leverController(new LeverController(this)),
       m_eyesControl(new EyesControl(this)),
       m_eyelidsControl(new EyelidsControl(this))
 {
@@ -85,5 +86,10 @@ void AnimatronicControl::sendEyelidsPosition(QPair<float, float> eyelidsPosition
 SliderController *AnimatronicControl::sliderController() const
 {
     return m_sliderController;
+}
+
+LeverController *AnimatronicControl::leverController() const
+{
+    return m_leverController;
 }
 

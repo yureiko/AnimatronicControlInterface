@@ -5,6 +5,7 @@
 #include "Controllers/joystickcontroller.h"
 #include "Controllers/toolbarcontroller.h"
 #include "Controllers/slidercontroller.h"
+#include "Controllers/levercontroller.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +17,8 @@ int main(int argc, char *argv[])
                                          "ToolBarController");
     qmlRegisterType<SliderController>("controllers", 1, 0,
                                          "ToolBarController");
+    qmlRegisterType<LeverController>("controllers", 1, 0,
+                                         "LeverController");
     // Creates root class
     AnimatronicControl animatronicControl;
 
@@ -23,6 +26,7 @@ int main(int argc, char *argv[])
     ToolBarController *toolBarController = animatronicControl.toolBarController();
     JoystickController *joystickController = animatronicControl.joystickController();
     SliderController *sliderController = animatronicControl.sliderController();
+    LeverController *leverController = animatronicControl.leverController();
 
     QQmlApplicationEngine engine;
 
@@ -30,6 +34,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty(QStringLiteral("joystickController"), joystickController);
     engine.rootContext()->setContextProperty(QStringLiteral("toolbarController"), toolBarController);
     engine.rootContext()->setContextProperty(QStringLiteral("sliderController"), sliderController);
+    engine.rootContext()->setContextProperty(QStringLiteral("leverController"), leverController);
 
     engine.load(QUrl(QStringLiteral("qrc:/mainview.qml")));
     if (engine.rootObjects().isEmpty())

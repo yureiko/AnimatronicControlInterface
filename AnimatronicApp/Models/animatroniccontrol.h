@@ -9,6 +9,7 @@
 #include "Threads/communicationthread.h"
 #include "eyescontrol.h"
 #include "eyelidscontrol.h"
+#include "eyebrowscontrol.h"
 
 class AnimatronicControl : public QObject
 {
@@ -16,29 +17,34 @@ class AnimatronicControl : public QObject
 public:
     explicit AnimatronicControl(QObject *parent = nullptr);
 
-    JoystickController *joystickController() const;
+    JoystickController *eyesController() const;
 
     ToolBarController *toolBarController() const;
 
-    SliderController *sliderController() const;
+    SliderController *eyelidsController() const;
 
-    LeverController *leverController() const;
+    LeverController *leftEyebrowController() const;
+
+    LeverController *rightEyebrowController() const;
 
 signals:
 
 private:
 
     void sendEyesPosition(QPointF eyesPosition);
-    void sendEyelidsPosition(QPair<float,float>);
+    void sendEyelidsPosition(QPair<float,float> eyelidsPosition);
+    void sendEyebrowsRotation(QPair<float, float> eyebrowsPosition);
 
     CommunicationThread *m_communicationThread;
-    JoystickController *m_joystickController;
+    JoystickController *m_eyesController;
     ToolBarController *m_toolBarController;
-    SliderController *m_sliderController;
-    LeverController *m_leverController;
+    SliderController *m_eyelidsController;
+    LeverController *m_leftEyebrowController;
+    LeverController *m_rightEyebrowController;
 
     EyesControl *m_eyesControl;
     EyelidsControl *m_eyelidsControl;
+    EyebrowsControl *m_eyebrowsControl;
 
 };
 

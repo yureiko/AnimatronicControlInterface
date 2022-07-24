@@ -24,17 +24,19 @@ int main(int argc, char *argv[])
 
     // Brings controllers references to main context
     ToolBarController *toolBarController = animatronicControl.toolBarController();
-    JoystickController *joystickController = animatronicControl.joystickController();
-    SliderController *sliderController = animatronicControl.sliderController();
-    LeverController *leverController = animatronicControl.leverController();
+    JoystickController *eyesController = animatronicControl.eyesController();
+    SliderController *eyelidsController = animatronicControl.eyelidsController();
+    LeverController *leftEyebrowController = animatronicControl.leftEyebrowController();
+    LeverController *rightEyebrowController = animatronicControl.rightEyebrowController();
 
     QQmlApplicationEngine engine;
 
     // Injects controllers context into qml side
-    engine.rootContext()->setContextProperty(QStringLiteral("joystickController"), joystickController);
+    engine.rootContext()->setContextProperty(QStringLiteral("eyesController"), eyesController);
     engine.rootContext()->setContextProperty(QStringLiteral("toolbarController"), toolBarController);
-    engine.rootContext()->setContextProperty(QStringLiteral("sliderController"), sliderController);
-    engine.rootContext()->setContextProperty(QStringLiteral("leverController"), leverController);
+    engine.rootContext()->setContextProperty(QStringLiteral("eyelidsController"), eyelidsController);
+    engine.rootContext()->setContextProperty(QStringLiteral("leftEyebrowController"), leftEyebrowController);
+    engine.rootContext()->setContextProperty(QStringLiteral("rightEyebrowController"), rightEyebrowController);
 
     engine.load(QUrl(QStringLiteral("qrc:/mainview.qml")));
     if (engine.rootObjects().isEmpty())

@@ -7,7 +7,7 @@ Window {
     id: window
     visible: true
     width: 480
-    height: 320
+    height: 480
 
     Rectangle {
         id: background
@@ -22,29 +22,29 @@ Window {
 
         CustomJoystick {
             id: eyeJoystickLeft
-            controller: joystickController
+            controller: eyesController
             backgroundColor: "white"
             anchors{
                 top: toolbar.bottom
                 topMargin: 60
                 left: background.left
-                leftMargin: 40
+                leftMargin: 60
 
             }
 
-            size: parent.width/5
+            size: parent.width/4
             cursorImage: "qrc:/Resources/iris.png"
         }
 
         CustomJoystick {
             id: eyeJoystickRight
-            controller: joystickController
+            controller: eyesController
             backgroundColor: "white"
 
             anchors{
                 top: eyeJoystickLeft.top
                 left: eyeJoystickLeft.right
-                leftMargin: size/4
+                leftMargin: size/2
             }
 
             size: eyeJoystickLeft.size
@@ -62,7 +62,7 @@ Window {
                 leftMargin: eyeJoystickRight.size/8
             }
             stepSize: 0.01
-            onMoved: sliderController.onPositionChanged(position)
+            onMoved: eyelidsController.onPositionChanged(position)
         }
 
         CustomLever {
@@ -73,9 +73,9 @@ Window {
                 bottomMargin: eyeJoystickLeft.size/10
             }
 
-            controller: leverController
+            controller: leftEyebrowController
             rotationPoint: Item.Left
-            height: eyeJoystickLeft.size/8
+            height: eyeJoystickLeft.size/6
             width: eyeJoystickLeft.width
         }
 
@@ -87,11 +87,28 @@ Window {
                 bottomMargin: eyeJoystickRight.size/10
             }
 
-            controller: leverController
+            controller: rightEyebrowController
             rotationPoint: Item.Right
             antiClockWiseRotation: true
-            height: eyeJoystickRight.size/8
+            height: eyeJoystickRight.size/6
             width: eyeJoystickLeft.width
         }
+
+        Rectangle {
+            id: snout
+            anchors{
+                right: eyeJoystickRight.left
+                left: eyeJoystickLeft.right
+                top: eyeJoystickLeft.bottom
+                topMargin: -width * 0.25
+            }
+            height: width * 0.9
+            radius: width * 0.3
+
+            color: "black"
+
+        }
+
+
     }
 }

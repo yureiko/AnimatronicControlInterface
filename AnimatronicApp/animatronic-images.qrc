@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>Resources/iris.png</file>
+        <file>Resources/snout.svg</file>
     </qresource>
 </RCC>

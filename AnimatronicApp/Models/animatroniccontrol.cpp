@@ -3,6 +3,7 @@
 #define MOVE_EYES_MESSAGE_ID 0x04
 #define MOVE_EYELIDS_MESSAGE_ID 0x05
 #define MOVE_EYEBROWS_MESSAGE_ID 0x06
+#define MOVE_MOUTH_MESSAGE_ID 0x07
 
 AnimatronicControl::AnimatronicControl(QObject *parent)
     : QObject(parent),
@@ -12,9 +13,11 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
       m_eyelidsController(new SliderController(this)),
       m_leftEyebrowController(new LeverController(this)),
       m_rightEyebrowController(new LeverController(this)),
+      m_mouthController(new SliderController),
       m_eyesControl(new EyesControl(this)),
       m_eyelidsControl(new EyelidsControl(this)),
-      m_eyebrowsControl(new EyebrowsControl(this))
+      m_eyebrowsControl(new EyebrowsControl(this)),
+      m_mouthControl(new MouthControl(this))
 {
     //TOOLBAR:
     connect(m_toolBarController, &ToolBarController::serialPortOpenRequested,
@@ -65,6 +68,14 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
                     QPair<float, float>(m_eyebrowsControl->leftRotationDegrees(),
                                         m_eyebrowsControl->rightRotationDegrees()));
     });
+
+    //MOUTH
+    connect(m_mouthController, &SliderController::sliderPositionChanged, m_mouthControl, [this](){
+
+        m_mouthControl->setPositionDegrees(m_mouthController->sliderPosition());
+    });
+
+    connect(m_mouthControl, &MouthControl::positionDegreesChanged, this, &AnimatronicControl::sendMouthPosition);
 }
 
 JoystickController *AnimatronicControl::eyesController() const
@@ -120,6 +131,23 @@ void AnimatronicControl::sendEyebrowsRotation(QPair<float, float> eyebrowsPositi
     dataOut.append(quint16(eyebrowsPosition.second * 100) >> 8);
 
     m_communicationThread->sendData(dataOut);
+}
+
+void AnimatronicControl::sendMouthPosition(float mouthPosition)
+{
+    QByteArray dataOut;
+
+    dataOut.append(MOVE_MOUTH_MESSAGE_ID);
+
+    dataOut.append(quint16(mouthPosition * 100) >> 0);
+    dataOut.append(quint16(mouthPosition * 100) >> 8);
+
+    m_communicationThread->sendData(dataOut);
+}
+
+SliderController *AnimatronicControl::mouthController() const
+{
+    return m_mouthController;
 }
 
 SliderController *AnimatronicControl::eyelidsController() const

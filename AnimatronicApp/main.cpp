@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<ToolBarController>("controllers", 1, 0,
                                          "ToolBarController");
     qmlRegisterType<SliderController>("controllers", 1, 0,
-                                         "ToolBarController");
+                                         "SliderController");
     qmlRegisterType<LeverController>("controllers", 1, 0,
                                          "LeverController");
     // Creates root class
@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
     SliderController *eyelidsController = animatronicControl.eyelidsController();
     LeverController *leftEyebrowController = animatronicControl.leftEyebrowController();
     LeverController *rightEyebrowController = animatronicControl.rightEyebrowController();
+    SliderController *mouthController = animatronicControl.mouthController();
 
     QQmlApplicationEngine engine;
 
@@ -37,6 +38,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty(QStringLiteral("eyelidsController"), eyelidsController);
     engine.rootContext()->setContextProperty(QStringLiteral("leftEyebrowController"), leftEyebrowController);
     engine.rootContext()->setContextProperty(QStringLiteral("rightEyebrowController"), rightEyebrowController);
+    engine.rootContext()->setContextProperty(QStringLiteral("mouthController"), mouthController);
 
     engine.load(QUrl(QStringLiteral("qrc:/mainview.qml")));
     if (engine.rootObjects().isEmpty())

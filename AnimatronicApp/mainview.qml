@@ -4,17 +4,24 @@ import QtQuick.Controls 2.15
 import controllers 1.0
 
 Window {
+    property real proportion: 16/9
+
     id: window
     visible: true
     width: 480
-    height: 480
+    height: proportion*width
+
+    minimumHeight: height
+    minimumWidth: width
+    maximumHeight: height
+    maximumWidth: width
 
     Rectangle {
         id: background
         anchors.fill: parent
         border.color: "white"
         border.width: 1
-        color: "gray"
+        color: "orange"
 
         CustomToolbar {
             id: toolbar
@@ -100,13 +107,42 @@ Window {
                 right: eyeJoystickRight.left
                 left: eyeJoystickLeft.right
                 top: eyeJoystickLeft.bottom
-                topMargin: -width * 0.25
             }
-            height: width * 0.9
-            radius: width * 0.3
+            height: width
+            color: "transparent"
 
-            color: "black"
+            Rectangle
+            {
+                width: eyeJoystickRight.size * 1.2
+                height: width *0.65
+                color: "transparent"
 
+                anchors{
+                    horizontalCenter: parent.horizontalCenter
+                    verticalCenter: parent.verticalCenter
+                }
+
+                Image {
+                    id: snoutImage
+                    anchors.fill: parent
+                    source: "qrc:/Resources/snout.svg"
+                }
+            }
+        }
+
+        Slider {
+            id: mouthSlider
+            orientation: Qt.Vertical
+
+            height: eyelidsSlider.height
+
+            anchors{
+                top: snout.bottom
+                left: eyeJoystickRight.right
+                leftMargin: eyeJoystickRight.size/8
+            }
+            stepSize: 0.01
+            onMoved: mouthController.onPositionChanged(position)
         }
 
 

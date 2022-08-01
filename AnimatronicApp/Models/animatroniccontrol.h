@@ -10,6 +10,7 @@
 #include "eyescontrol.h"
 #include "eyelidscontrol.h"
 #include "eyebrowscontrol.h"
+#include "mouthcontrol.h"
 
 class AnimatronicControl : public QObject
 {
@@ -27,6 +28,8 @@ public:
 
     LeverController *rightEyebrowController() const;
 
+    SliderController *mouthController() const;
+
 signals:
 
 private:
@@ -34,6 +37,7 @@ private:
     void sendEyesPosition(QPointF eyesPosition);
     void sendEyelidsPosition(QPair<float,float> eyelidsPosition);
     void sendEyebrowsRotation(QPair<float, float> eyebrowsPosition);
+    void sendMouthPosition(float mouthPosition);
 
     CommunicationThread *m_communicationThread;
     JoystickController *m_eyesController;
@@ -41,11 +45,12 @@ private:
     SliderController *m_eyelidsController;
     LeverController *m_leftEyebrowController;
     LeverController *m_rightEyebrowController;
+    SliderController *m_mouthController;
 
     EyesControl *m_eyesControl;
     EyelidsControl *m_eyelidsControl;
     EyebrowsControl *m_eyebrowsControl;
-
+    MouthControl *m_mouthControl;
 };
 
 #endif // ANIMATRONICCONTROL_H

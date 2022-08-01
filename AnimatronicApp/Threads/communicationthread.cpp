@@ -6,7 +6,7 @@
 
 CommunicationThread::CommunicationThread(QObject *parent)
     : QThread(parent),
-      m_serialPort(new QSerialPort()),
+      m_serialPort(new QSerialPort(this)),
       m_quit(false)
 {
     m_serialPort->setBaudRate(QSerialPort::Baud115200);
@@ -24,12 +24,10 @@ void CommunicationThread::run()
     {
         if(!m_dataOut.isEmpty() && m_serialPort->isWritable())
         {
-            QByteArray dataSend = m_dataOut.first();
+            QByteArray dataSend = m_dataOut.takeFirst();
 
             m_serialPort->write(dataSend);
             m_serialPort->waitForBytesWritten(-1);
-
-            m_dataOut.removeFirst();
 
             qDebug() << dataSend;
         }

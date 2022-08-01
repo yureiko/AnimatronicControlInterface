@@ -23,8 +23,6 @@ private:
     QPair<float,float> m_positionDegrees;
     QPair<float,float> m_positionCenterOffsetDegrees;
 
-signals:
-
 };
 
 #endif // EYELIDSCONTROL_H

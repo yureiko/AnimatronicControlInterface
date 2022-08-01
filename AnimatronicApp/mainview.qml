@@ -9,7 +9,7 @@ Window {
     id: window
     visible: true
     width: 480
-    height: proportion*480
+    height: proportion*width
 
     minimumHeight: height
     minimumWidth: width
@@ -113,8 +113,8 @@ Window {
 
             Rectangle
             {
-                width: eyeJoystickRight.size * 0.7
-                height: width *0.9
+                width: eyeJoystickRight.size * 1.2
+                height: width *0.65
                 color: "transparent"
 
                 anchors{
@@ -142,7 +142,7 @@ Window {
                 leftMargin: eyeJoystickRight.size/8
             }
             stepSize: 0.01
-            onMoved: eyelidsController.onPositionChanged(position)
+            onMoved: mouthController.onPositionChanged(position)
         }
 
 

@@ -4,7 +4,7 @@ import QtQuick.Controls 2.15
 import controllers 1.0
 
 Window {
-    property real proportion: 16/9
+    property real proportion: 4/3
 
     id: window
     visible: true
@@ -33,9 +33,9 @@ Window {
             backgroundColor: "white"
             anchors{
                 top: toolbar.bottom
-                topMargin: 60
+                topMargin: 80
                 left: background.left
-                leftMargin: 60
+                leftMargin: 70
 
             }
 
@@ -61,6 +61,7 @@ Window {
         Slider {
             id: eyelidsSlider
             orientation: Qt.Vertical
+            value: 0.5
 
             anchors{
                 top: eyeJoystickRight.top
@@ -102,7 +103,7 @@ Window {
         }
 
         Rectangle {
-            id: snout
+            id: centerEyesReference
             anchors{
                 right: eyeJoystickRight.left
                 left: eyeJoystickLeft.right
@@ -110,29 +111,50 @@ Window {
             }
             height: width
             color: "transparent"
+        }
 
-            Rectangle
-            {
-                width: eyeJoystickRight.size * 1.2
-                height: width *0.65
-                color: "transparent"
+        Rectangle
+        {
+            id: snout
+            width: eyeJoystickRight.size * 1.2
+            height: width *0.65
+            color: "transparent"
 
-                anchors{
-                    horizontalCenter: parent.horizontalCenter
-                    verticalCenter: parent.verticalCenter
-                }
+            anchors{
+                horizontalCenter: centerEyesReference.horizontalCenter
+                verticalCenter: centerEyesReference.verticalCenter
+            }
 
-                Image {
-                    id: snoutImage
-                    anchors.fill: parent
-                    source: "qrc:/Resources/snout.svg"
-                }
+            Image {
+                id: snoutImage
+                anchors.fill: parent
+                source: "qrc:/Resources/snout.svg"
+            }
+        }
+
+        Rectangle{
+            id: mouth
+            width: snout.width*0.65
+            height: width *0.5
+            color: "transparent"
+
+            anchors{
+                horizontalCenter: snout.horizontalCenter
+
+            }
+            y: (1 - mouthSlider.position) * 0.5 * height + snout.y + snout.height
+
+            Image {
+                id: mouthImage
+                anchors.fill: parent
+                source: "qrc:/Resources/mouth.svg"
             }
         }
 
         Slider {
             id: mouthSlider
             orientation: Qt.Vertical
+            value: 1.0
 
             height: eyelidsSlider.height
 
@@ -144,7 +166,6 @@ Window {
             stepSize: 0.01
             onMoved: mouthController.onPositionChanged(position)
         }
-
 
     }
 }

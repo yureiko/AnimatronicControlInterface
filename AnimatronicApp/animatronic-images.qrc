@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>Resources/iris.png</file>
         <file>Resources/snout.svg</file>
+        <file>Resources/mouth.svg</file>
     </qresource>
 </RCC>

@@ -1,7 +1,7 @@
 #include "eyebrowscontrol.h"
 
-#define MAX_ROTATION_DEG_VALUE 10.f
-#define MIN_ROTATION_DEG_VALUE -10.f
+#define MAX_ROTATION_DEG_VALUE 20.f
+#define MIN_ROTATION_DEG_VALUE -20.f
 
 #define CENTER_DEG_VALUE 90.f
 
@@ -19,17 +19,17 @@ qreal EyebrowsControl::leftRotationDegrees() const
 
 void EyebrowsControl::setLeftRotationDegrees(qreal rotation)
 {
-    qreal rotationDegrees = rotation;
+    qreal rotationDegrees = 2*rotation;
 
     if(rotationDegrees > MAX_ROTATION_DEG_VALUE)
     {
-        rotationDegrees = 10.f;
+        rotationDegrees = MAX_ROTATION_DEG_VALUE;
     }
     else if(rotationDegrees < MIN_ROTATION_DEG_VALUE)
     {
-        rotationDegrees = -10.f;
+        rotationDegrees = MIN_ROTATION_DEG_VALUE;
     }
-    m_leftRotationDegrees = rotationDegrees + CENTER_DEG_VALUE;
+    m_leftRotationDegrees = -rotationDegrees + CENTER_DEG_VALUE;
 
     emit rotationDegreesChanged(m_leftRotationDegrees);
 }
@@ -41,15 +41,15 @@ qreal EyebrowsControl::rightRotationDegrees() const
 
 void EyebrowsControl::setRightRotationDegrees(qreal rotation)
 {
-    qreal rotationDegrees = rotation;
+    qreal rotationDegrees = 2*rotation;
 
     if(rotationDegrees > MAX_ROTATION_DEG_VALUE)
     {
-        rotationDegrees = 10.f;
+        rotationDegrees = MAX_ROTATION_DEG_VALUE;
     }
     else if(rotationDegrees < MIN_ROTATION_DEG_VALUE)
     {
-        rotationDegrees = -10.f;
+        rotationDegrees = MIN_ROTATION_DEG_VALUE;
     }
     m_rightRotationDegrees = rotationDegrees + CENTER_DEG_VALUE;
 

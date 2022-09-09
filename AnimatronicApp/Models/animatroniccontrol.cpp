@@ -33,12 +33,12 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
     //COMMUNICATION THREAD
     connect(m_communicationThread, &CommunicationThread::serialPortOpened, m_toolBarController, [this](){
         m_toolBarController->setIsSerialPortOpen(true);
-        startTimer();
+        startCommunicationTimer();
     });
 
     connect(m_communicationThread, &CommunicationThread::serialPortClosed, m_toolBarController, [this](){
         m_toolBarController->setIsSerialPortOpen(false);
-        stopTimer();
+        stopCommunicationTimer();
     });
 
     //EYES:
@@ -82,7 +82,7 @@ ToolBarController *AnimatronicControl::toolBarController() const
     return m_toolBarController;
 }
 
-void AnimatronicControl::setEyesPositionData(QPointF eyesPosition)
+void AnimatronicControl::sendEyesPosition(QPointF eyesPosition)
 {
     QByteArray dataOut;
 
@@ -97,7 +97,7 @@ void AnimatronicControl::setEyesPositionData(QPointF eyesPosition)
     m_communicationThread->sendData(dataOut);
 }
 
-void AnimatronicControl::setEyelidsPositionData(QPair<float, float> eyelidsPosition)
+void AnimatronicControl::sendEyelidsPosition(QPair<float, float> eyelidsPosition)
 {
     QByteArray dataOut;
 
@@ -112,7 +112,7 @@ void AnimatronicControl::setEyelidsPositionData(QPair<float, float> eyelidsPosit
     m_communicationThread->sendData(dataOut);
 }
 
-void AnimatronicControl::setEyebrowsRotationData(QPair<float, float> eyebrowsPosition)
+void AnimatronicControl::sendEyebrowsRotation(QPair<float, float> eyebrowsPosition)
 {
     QByteArray dataOut;
 
@@ -127,7 +127,7 @@ void AnimatronicControl::setEyebrowsRotationData(QPair<float, float> eyebrowsPos
     m_communicationThread->sendData(dataOut);
 }
 
-void AnimatronicControl::setMouthPositionData(float mouthPosition)
+void AnimatronicControl::sendMouthPosition(float mouthPosition)
 {
     QByteArray dataOut;
 
@@ -146,16 +146,16 @@ void AnimatronicControl::sendPositions()
     switch (index)
     {
         case 0:
-            setEyesPositionData(m_eyesControl->positionDegrees());
+            sendEyesPosition(m_eyesControl->positionDegrees());
         break;
         case 1:
-            setEyelidsPositionData(m_eyelidsControl->positionDegrees());
+            sendEyelidsPosition(m_eyelidsControl->positionDegrees());
         break;
         case 2:
-            setEyebrowsRotationData(m_eyebrowsControl->positionDegrees());
+            sendEyebrowsRotation(m_eyebrowsControl->positionDegrees());
         break;
         case 3:
-            setMouthPositionData(m_mouthControl->positionDegrees());
+            sendMouthPosition(m_mouthControl->positionDegrees());
         break;
     }
 
@@ -165,12 +165,12 @@ void AnimatronicControl::sendPositions()
     }
 }
 
-void AnimatronicControl::startTimer()
+void AnimatronicControl::startCommunicationTimer()
 {
     m_communicationTimer->start(2);
 }
 
-void AnimatronicControl::stopTimer()
+void AnimatronicControl::stopCommunicationTimer()
 {
     m_communicationTimer->stop();
 }

@@ -5,21 +5,39 @@
 #include <QPointF>
 #include <QVariantList>
 
+/**
+ * @brief The JoystickController class provides a controller for a joystick view
+ */
 class JoystickController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QPointF ui_joystickPosition READ joystickPosition NOTIFY joystickPositionChanged)
 
 public:
+    /**
+     * @brief Constructor
+     * @param parent
+     */
     explicit JoystickController(QObject *parent = nullptr);
 
+    /**
+     * @brief returns the normalized joystick position
+     * @return QPointF
+     */
     QPointF joystickPosition() const;
 
 public slots:
+    /**
+     * @brief sets the joystick position
+     * @param newJoystickPosition
+     */
     void setJoystickPosition(QVariantList newJoystickPosition);
 
 signals:
 
+    /**
+     * @brief notifies the view when joystick position changed
+     */
     void joystickPositionChanged();
 
 private:

@@ -3,18 +3,36 @@
 
 #include <QObject>
 
+/**
+ * @brief The SliderController class provides a controller for a slider view
+ */
 class SliderController : public QObject
 {
     Q_OBJECT
 public:
+    /**
+     * @brief Constructor
+     * @param parent
+     */
     explicit SliderController(QObject *parent = nullptr);
 
+    /**
+     * @brief returns the normalized slider position
+     * @return
+     */
     float sliderPosition() const;
 
 signals:
+    /**
+     * @brief notifies the view when slider position changed
+     */
     void sliderPositionChanged();
 
 public slots:
+    /**
+     * @brief internal slot triggered when slider view position changed
+     * @param position
+     */
     Q_INVOKABLE void onPositionChanged(float position);
 
 private:

@@ -7,10 +7,15 @@
 #include "Controllers/slidercontroller.h"
 #include "Controllers/levercontroller.h"
 
+/**
+ * @brief This application follows the MVC architecture, when the models are terminated by "control" sufix
+ * views have the ".qml" extensions and controllers are terminated by "controller" sufix
+ */
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
+    // Registers all Controllers into qml
     qmlRegisterType<JoystickController>("controllers", 1, 0,
                                          "JoystickController");
     qmlRegisterType<ToolBarController>("controllers", 1, 0,
@@ -40,7 +45,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty(QStringLiteral("rightEyebrowController"), rightEyebrowController);
     engine.rootContext()->setContextProperty(QStringLiteral("mouthController"), mouthController);
 
-    engine.load(QUrl(QStringLiteral("qrc:/mainview.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/Views/mainview.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
 

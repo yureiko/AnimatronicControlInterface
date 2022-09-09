@@ -12,35 +12,94 @@
 #include "eyebrowscontrol.h"
 #include "mouthcontrol.h"
 
+/**
+ * @brief The AnimatronicControl class manage all animatronic parts
+ */
 class AnimatronicControl : public QObject
 {
-    Q_OBJECT
 public:
+    /**
+     * @brief Constructor
+     * @param parent
+     */
     explicit AnimatronicControl(QObject *parent = nullptr);
 
+    /**
+     * @brief Gets the eyes controller instance
+     * @return eyesController
+     */
     JoystickController *eyesController() const;
 
+    /**
+     * @brief Gets the toolBar controller instance
+     * @return toolBarController
+     */
     ToolBarController *toolBarController() const;
 
+    /**
+     * @brief Gets the eyelids controller instance
+     * @return eyelidsController
+     */
     SliderController *eyelidsController() const;
 
+    /**
+     * @brief Gets the left eyebrow controller instance
+     * @return leftEyebrowController
+     */
     LeverController *leftEyebrowController() const;
 
+    /**
+     * @brief Gets the right eyebrow controller instance
+     * @return rightEyebrowController
+     */
     LeverController *rightEyebrowController() const;
 
+    /**
+     * @brief Gets the mouth controller instance
+     * @return mouthController
+     */
     SliderController *mouthController() const;
-
-signals:
 
 private:
 
-    void setEyesPositionData(QPointF eyesPosition);
-    void setEyelidsPositionData(QPair<float,float> eyelidsPosition);
-    void setEyebrowsRotationData(QPair<float, float> eyebrowsPosition);
-    void setMouthPositionData(float mouthPosition);
+    /**
+     * @brief send formated eyes position to the communication module
+     * @param eyesPosition
+     */
+    void sendEyesPosition(QPointF eyesPosition);
+
+    /**
+     * @brief send formated eyelids position to the communication module
+     * @param eyelidsPosition
+     */
+    void sendEyelidsPosition(QPair<float,float> eyelidsPosition);
+
+    /**
+     * @brief send formated eyebrows position to the communication module
+     * @param eyebrowsPosition
+     */
+    void sendEyebrowsRotation(QPair<float, float> eyebrowsPosition);
+
+    /**
+     * @brief send formated mouth position to the communication module
+     * @param mouthPosition
+     */
+    void sendMouthPosition(float mouthPosition);
+
+    /**
+     * @brief send all parts positions, each per call
+     */
     void sendPositions();
-    void startTimer();
-    void stopTimer();
+
+    /**
+     * @brief starts the communication timer
+     */
+    void startCommunicationTimer();
+
+    /**
+     * @brief stops the communication timer
+     */
+    void stopCommunicationTimer();
 
     CommunicationThread *m_communicationThread;
     QTimer *m_communicationTimer;

@@ -7,7 +7,8 @@
 
 EyebrowsControl::EyebrowsControl(QObject *parent)
     : QObject(parent),
-    m_leftRotationDegrees(0.0)
+    m_leftRotationDegrees(CENTER_DEG_VALUE),
+    m_rightRotationDegrees(CENTER_DEG_VALUE)
 {
 
 }

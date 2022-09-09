@@ -12,7 +12,6 @@ void SliderController::onPositionChanged(float position)
     m_sliderPosition = position;
 
     emit sliderPositionChanged();
-    qDebug() << position;
 }
 
 float SliderController::sliderPosition() const

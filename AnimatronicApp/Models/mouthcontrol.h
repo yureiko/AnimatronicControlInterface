@@ -2,6 +2,7 @@
 #define MOUTHCONTROL_H
 
 #include <QObject>
+#include <QTimer>
 
 class MouthControl : public QObject
 {
@@ -18,8 +19,12 @@ signals:
     void positionDegreesChanged(float positionDegrees);
 
 private:
-    float m_positionDegrees;
+    void breathe();
 
+    float m_positionDegrees;
+    QTimer *m_breatheTimer;
+    float m_breatheOffsetDegrees;
+    bool m_isBreathOffsetIncrement;
 };
 
 #endif // MOUTHCONTROL_H

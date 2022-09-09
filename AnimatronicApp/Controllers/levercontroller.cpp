@@ -32,6 +32,4 @@ void LeverController::setRotation(QVariantList newPosition)
     }
 
     emit rotationChanged();
-
-    qDebug() << "rotation: " << m_rotation;
 }

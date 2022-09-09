@@ -7,7 +7,8 @@
 #define VERTICAL_MIN_DEG_VALUE 35
 
 EyesControl::EyesControl(QObject *parent)
-    : QObject(parent)
+    : QObject(parent),
+      m_positionDegrees(QPointF(0.f, 0.f))
 {
 
 }

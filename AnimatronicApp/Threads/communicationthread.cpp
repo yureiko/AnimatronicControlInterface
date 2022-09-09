@@ -32,7 +32,6 @@ void CommunicationThread::run()
             m_serialPort->write(dataSend);
             m_serialPort->waitForBytesWritten(5);
 
-            qDebug() << dataSend;
         }
         QThread::msleep(1);
     }

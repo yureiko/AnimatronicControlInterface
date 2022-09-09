@@ -28,6 +28,4 @@ void JoystickController::setJoystickPosition(QVariantList newJoystickPosition)
     }
 
     emit joystickPositionChanged();
-
-    qDebug() << "pos: " << m_joystickPosition;
 }

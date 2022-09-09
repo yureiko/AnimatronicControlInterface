@@ -2,6 +2,7 @@ import QtQuick 2.5
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.15
 import controllers 1.0
+import QtGraphicalEffects 1.15
 
 Window {
     property real proportion: 4/3
@@ -166,6 +167,5 @@ Window {
             stepSize: 0.01
             onMoved: mouthController.onPositionChanged(position)
         }
-
     }
 }

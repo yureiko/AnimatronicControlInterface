@@ -3,6 +3,7 @@
 
 #define DATA_START_MESSAGE_FLAG 0xAA
 #define DATA_END_MESSAGE_FLAG 0x55
+#define MAX_OUT_BUFFER 12
 
 CommunicationThread::CommunicationThread(QObject *parent)
     : QThread(parent),
@@ -20,6 +21,8 @@ void CommunicationThread::run()
 {
     m_quit = false;
 
+    m_serialPort->clear();
+
     while(!m_quit)
     {
         if(!m_dataOut.isEmpty() && m_serialPort->isWritable())
@@ -27,10 +30,11 @@ void CommunicationThread::run()
             QByteArray dataSend = m_dataOut.takeFirst();
 
             m_serialPort->write(dataSend);
-            m_serialPort->waitForBytesWritten(-1);
+            m_serialPort->waitForBytesWritten(5);
 
             qDebug() << dataSend;
         }
+        QThread::msleep(1);
     }
 }
 
@@ -48,6 +52,10 @@ void CommunicationThread::sendData(QByteArray data)
     dataOut.append(DATA_END_MESSAGE_FLAG);
     dataOut.append(DATA_END_MESSAGE_FLAG);
 
+    if(m_dataOut.size() > MAX_OUT_BUFFER)
+    {
+        m_dataOut.takeLast();
+    }
     m_dataOut.append(dataOut);
 }
 

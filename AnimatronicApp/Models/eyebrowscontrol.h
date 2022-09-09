@@ -13,6 +13,8 @@ public:
 
     qreal rightRotationDegrees() const;
 
+    QPair<float, float> positionDegrees();
+
 public slots:
     void setLeftRotationDegrees(qreal rotation);
 

@@ -8,6 +8,7 @@
 AnimatronicControl::AnimatronicControl(QObject *parent)
     : QObject(parent),
       m_communicationThread(new CommunicationThread(this)),
+      m_communicationTimer(new QTimer(this)),
       m_eyesController(new JoystickController(this)),
       m_toolBarController(new ToolBarController(this)),
       m_eyelidsController(new SliderController(this)),
@@ -26,13 +27,18 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
     connect(m_toolBarController, &ToolBarController::serialPortCloseRequested,
             m_communicationThread, &CommunicationThread::closeSerialPort);
 
+    //COMMUNICATION TIMER
+    connect(m_communicationTimer, &QTimer::timeout, this, &AnimatronicControl::sendPositions);
+
     //COMMUNICATION THREAD
     connect(m_communicationThread, &CommunicationThread::serialPortOpened, m_toolBarController, [this](){
         m_toolBarController->setIsSerialPortOpen(true);
+        startTimer();
     });
 
     connect(m_communicationThread, &CommunicationThread::serialPortClosed, m_toolBarController, [this](){
         m_toolBarController->setIsSerialPortOpen(false);
+        stopTimer();
     });
 
     //EYES:
@@ -42,15 +48,11 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
         m_eyelidsControl->setPositionCenterYOffsetDegrees(m_eyesController->joystickPosition().y());
     });
 
-    connect(m_eyesControl, &EyesControl::positionDegreesChanged, this, &AnimatronicControl::sendEyesPosition);
-
     //EYELIDS:
     connect(m_eyelidsController, &SliderController::sliderPositionChanged, m_eyelidsControl, [this](){
 
         m_eyelidsControl->setPositionDegrees({m_eyelidsController->sliderPosition(), m_eyelidsController->sliderPosition()});
     });
-
-    connect(m_eyelidsControl, &EyelidsControl::positionDegreesChanged, this, &AnimatronicControl::sendEyelidsPosition);
 
     //EYEBROWS:
     connect(m_leftEyebrowController, &LeverController::rotationChanged, m_eyebrowsControl, [this](){
@@ -63,19 +65,11 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
         m_eyebrowsControl->setRightRotationDegrees(m_rightEyebrowController->rotation());
     });
 
-    connect(m_eyebrowsControl, &EyebrowsControl::rotationDegreesChanged, this, [this](){
-        sendEyebrowsRotation(
-                    QPair<float, float>(m_eyebrowsControl->leftRotationDegrees(),
-                                        m_eyebrowsControl->rightRotationDegrees()));
-    });
-
     //MOUTH
     connect(m_mouthController, &SliderController::sliderPositionChanged, m_mouthControl, [this](){
 
         m_mouthControl->setPositionDegrees(m_mouthController->sliderPosition());
     });
-
-    connect(m_mouthControl, &MouthControl::positionDegreesChanged, this, &AnimatronicControl::sendMouthPosition);
 }
 
 JoystickController *AnimatronicControl::eyesController() const
@@ -88,7 +82,7 @@ ToolBarController *AnimatronicControl::toolBarController() const
     return m_toolBarController;
 }
 
-void AnimatronicControl::sendEyesPosition(QPointF eyesPosition)
+void AnimatronicControl::setEyesPositionData(QPointF eyesPosition)
 {
     QByteArray dataOut;
 
@@ -103,7 +97,7 @@ void AnimatronicControl::sendEyesPosition(QPointF eyesPosition)
     m_communicationThread->sendData(dataOut);
 }
 
-void AnimatronicControl::sendEyelidsPosition(QPair<float, float> eyelidsPosition)
+void AnimatronicControl::setEyelidsPositionData(QPair<float, float> eyelidsPosition)
 {
     QByteArray dataOut;
 
@@ -118,7 +112,7 @@ void AnimatronicControl::sendEyelidsPosition(QPair<float, float> eyelidsPosition
     m_communicationThread->sendData(dataOut);
 }
 
-void AnimatronicControl::sendEyebrowsRotation(QPair<float, float> eyebrowsPosition)
+void AnimatronicControl::setEyebrowsRotationData(QPair<float, float> eyebrowsPosition)
 {
     QByteArray dataOut;
 
@@ -133,7 +127,7 @@ void AnimatronicControl::sendEyebrowsRotation(QPair<float, float> eyebrowsPositi
     m_communicationThread->sendData(dataOut);
 }
 
-void AnimatronicControl::sendMouthPosition(float mouthPosition)
+void AnimatronicControl::setMouthPositionData(float mouthPosition)
 {
     QByteArray dataOut;
 
@@ -143,6 +137,42 @@ void AnimatronicControl::sendMouthPosition(float mouthPosition)
     dataOut.append(quint16(mouthPosition * 100) >> 8);
 
     m_communicationThread->sendData(dataOut);
+}
+
+void AnimatronicControl::sendPositions()
+{
+    static uint index = 0;
+
+    switch (index)
+    {
+        case 0:
+            setEyesPositionData(m_eyesControl->positionDegrees());
+        break;
+        case 1:
+            setEyelidsPositionData(m_eyelidsControl->positionDegrees());
+        break;
+        case 2:
+            setEyebrowsRotationData(m_eyebrowsControl->positionDegrees());
+        break;
+        case 3:
+            setMouthPositionData(m_mouthControl->positionDegrees());
+        break;
+    }
+
+    if(index++ > 3)
+    {
+        index = 0;
+    }
+}
+
+void AnimatronicControl::startTimer()
+{
+    m_communicationTimer->start(2);
+}
+
+void AnimatronicControl::stopTimer()
+{
+    m_communicationTimer->stop();
 }
 
 SliderController *AnimatronicControl::mouthController() const

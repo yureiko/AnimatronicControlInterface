@@ -1,21 +1,24 @@
 #include "eyelidscontrol.h"
 
-#define SUPERIOR_MAX_DEG_VALUE 180.f
+#define SUPERIOR_MAX_DEG_VALUE 100.f
 #define SUPERIOR_MIN_DEG_VALUE 0.f
 
-#define INFERIOR_MAX_DEG_VALUE 180.f
+#define INFERIOR_MAX_DEG_VALUE 100.f
 #define INFERIOR_MIN_DEG_VALUE 0.f
 
 EyelidsControl::EyelidsControl(QObject *parent)
     : QObject(parent),
+      m_positionDegrees({0.f,0.f}),
       m_positionCenterOffsetDegrees({0.f,0.f})
+
 {
 
 }
 
 QPair<float,float> EyelidsControl::positionDegrees() const
 {
-    return m_positionDegrees;
+    return QPair<float,float>({m_positionDegrees.first + 0.15f*m_positionCenterOffsetDegrees.first,
+            m_positionDegrees.second - 0.15f*m_positionCenterOffsetDegrees.second});
 }
 
 void EyelidsControl::setPositionDegrees(QPair<float,float> newPosition)

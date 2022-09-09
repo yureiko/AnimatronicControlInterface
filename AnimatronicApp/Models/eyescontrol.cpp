@@ -3,8 +3,8 @@
 #define HORIZONTAL_MAX_DEG_VALUE 135
 #define HORIZONTAL_MIN_DEG_VALUE 45
 
-#define VERTICAL_MAX_DEG_VALUE 135
-#define VERTICAL_MIN_DEG_VALUE 45
+#define VERTICAL_MAX_DEG_VALUE 145
+#define VERTICAL_MIN_DEG_VALUE 35
 
 EyesControl::EyesControl(QObject *parent)
     : QObject(parent)

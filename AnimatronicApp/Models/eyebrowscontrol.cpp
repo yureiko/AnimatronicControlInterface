@@ -39,6 +39,11 @@ qreal EyebrowsControl::rightRotationDegrees() const
     return m_rightRotationDegrees;
 }
 
+QPair<float, float> EyebrowsControl::positionDegrees()
+{
+    return QPair<float, float>(leftRotationDegrees(), rightRotationDegrees());
+}
+
 void EyebrowsControl::setRightRotationDegrees(qreal rotation)
 {
     qreal rotationDegrees = 2*rotation;

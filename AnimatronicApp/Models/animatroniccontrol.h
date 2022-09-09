@@ -34,12 +34,16 @@ signals:
 
 private:
 
-    void sendEyesPosition(QPointF eyesPosition);
-    void sendEyelidsPosition(QPair<float,float> eyelidsPosition);
-    void sendEyebrowsRotation(QPair<float, float> eyebrowsPosition);
-    void sendMouthPosition(float mouthPosition);
+    void setEyesPositionData(QPointF eyesPosition);
+    void setEyelidsPositionData(QPair<float,float> eyelidsPosition);
+    void setEyebrowsRotationData(QPair<float, float> eyebrowsPosition);
+    void setMouthPositionData(float mouthPosition);
+    void sendPositions();
+    void startTimer();
+    void stopTimer();
 
     CommunicationThread *m_communicationThread;
+    QTimer *m_communicationTimer;
     JoystickController *m_eyesController;
     ToolBarController *m_toolBarController;
     SliderController *m_eyelidsController;

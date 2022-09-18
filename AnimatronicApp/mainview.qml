@@ -47,7 +47,6 @@ Window {
             id: eyeJoystickRight
             controller: eyesController
             backgroundColor: "white"
-
             anchors{
                 top: eyeJoystickLeft.top
                 left: eyeJoystickLeft.right
@@ -201,6 +200,49 @@ Window {
             }
             stepSize: 0.01
             onMoved: mouthController.onPositionChanged(position)
+        }
+
+        Image{
+            id: leftSuperiorEyelidAnimation
+            source: "qrc:/Resources/eyelidClosed100.svg"
+            anchors{
+                top: eyeJoystickLeft.top
+                horizontalCenter: eyeJoystickLeft.horizontalCenter
+            }
+            height: (1 - superiorEyelidsSlider.value * 0.7) * eyeJoystickLeft.size/2
+            width: eyeJoystickLeft.width - superiorEyelidsSlider.value * eyeJoystickLeft.size/6
+        }
+        Image{
+            id: rightSuperiorEyelidAnimation
+            source: "qrc:/Resources/eyelidClosed100.svg"
+            anchors{
+                top: eyeJoystickRight.top
+                horizontalCenter: eyeJoystickRight.horizontalCenter
+            }
+            height: (1 - superiorEyelidsSlider.value * 0.7) * eyeJoystickLeft.size/2
+            width: eyeJoystickRight.width - superiorEyelidsSlider.value * eyeJoystickRight.size/6
+        }
+        Image{
+            id: leftInferiorEyelidAnimation
+            source: "qrc:/Resources/eyelidClosed100.svg"
+            anchors{
+                bottom: eyeJoystickLeft.bottom
+                horizontalCenter: eyeJoystickLeft.horizontalCenter
+            }
+            height: (1 - inferiorEyelidsSlider.value * 0.7) * eyeJoystickLeft.size/2
+            width: eyeJoystickLeft.width - inferiorEyelidsSlider.value *  eyeJoystickLeft.size/6
+            rotation: 180
+        }
+        Image{
+            id: rightInferiorEyelidAnimation
+            source: "qrc:/Resources/eyelidClosed100.svg"
+            anchors{
+                bottom: eyeJoystickRight.bottom
+                horizontalCenter: eyeJoystickRight.horizontalCenter
+            }
+            height: (1 - inferiorEyelidsSlider.value * 0.7) * eyeJoystickLeft.size/2
+            width: eyeJoystickRight.width - inferiorEyelidsSlider.value * eyeJoystickRight.size/6
+            rotation: 180
         }
     }
 }

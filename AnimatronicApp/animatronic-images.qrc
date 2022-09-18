@@ -3,5 +3,6 @@
         <file>Resources/iris.png</file>
         <file>Resources/snout.svg</file>
         <file>Resources/mouth.svg</file>
+        <file>Resources/eyebrow.png</file>
     </qresource>
 </RCC>

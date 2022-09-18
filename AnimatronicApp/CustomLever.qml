@@ -8,13 +8,21 @@ Rectangle {
     property var controller
     property var rotationPoint
     property bool antiClockWiseRotation: false
+    property var image
+    property bool mirrored
 
     id: customLever
     transformOrigin: rotationPoint
     rotation: antiClockWiseRotation? -controller.ui_rotation : controller.ui_rotation
-    color: "black"
+    color: "transparent"
 
     antialiasing: true
+
+    Image {
+        anchors.fill: parent
+        source: image
+        mirror: mirrored
+    }
 
     MouseArea{
        id: mouseArea

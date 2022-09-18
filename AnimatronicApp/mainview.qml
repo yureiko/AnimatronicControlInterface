@@ -2,7 +2,6 @@ import QtQuick 2.5
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.15
 import controllers 1.0
-import QtGraphicalEffects 1.15
 
 Window {
     property real proportion: 4/3
@@ -34,9 +33,9 @@ Window {
             backgroundColor: "white"
             anchors{
                 top: toolbar.bottom
-                topMargin: 80
+                topMargin: 100
                 left: background.left
-                leftMargin: 70
+                leftMargin: 60
 
             }
 
@@ -60,18 +59,49 @@ Window {
         }
 
         Slider {
-            id: eyelidsSlider
+            id: superiorEyelidsSlider
             orientation: Qt.Vertical
-            value: 0.5
+            value: eyelidsSlider.position
 
             anchors{
+                topMargin: - eyeJoystickRight.size/8
                 top: eyeJoystickRight.top
-                bottom: eyeJoystickRight.bottom
+                bottom: eyeJoystickRight.verticalCenter
                 left: eyeJoystickRight.right
                 leftMargin: eyeJoystickRight.size/8
             }
             stepSize: 0.01
-            onMoved: eyelidsController.onPositionChanged(position)
+            onMoved: superiorEyelidsController.onPositionChanged(position)
+        }
+
+        Slider {
+            id: inferiorEyelidsSlider
+            orientation: Qt.Vertical
+            rotation: 180
+            value: eyelidsSlider.position
+
+            anchors{
+                top: superiorEyelidsSlider.bottom
+                left: eyeJoystickRight.right
+                leftMargin: eyeJoystickRight.size/8
+            }
+            height: superiorEyelidsSlider.height
+            stepSize: 0.01
+            onMoved: inferiorEyelidsController.onPositionChanged(position)
+        }
+
+        Slider {
+            id: eyelidsSlider
+            orientation: Qt.Vertical
+            value: 0.0
+
+            anchors{
+                top: superiorEyelidsSlider.top
+                bottom: inferiorEyelidsSlider.bottom
+                left: superiorEyelidsSlider.right
+            }
+            stepSize: 0.01
+            onMoved: superiorEyelidsController.onPositionChanged(position)
         }
 
         CustomLever {
@@ -79,12 +109,14 @@ Window {
             anchors{
                 left: eyeJoystickLeft.left
                 bottom: eyeJoystickLeft.top
-                bottomMargin: eyeJoystickLeft.size/10
+
             }
 
             controller: leftEyebrowController
             rotationPoint: Item.Left
-            height: eyeJoystickLeft.size/6
+            image: "qrc:/Resources/eyebrow.png"
+            mirrored: false
+            height: eyeJoystickLeft.size/2.5
             width: eyeJoystickLeft.width
         }
 
@@ -93,13 +125,14 @@ Window {
             anchors{
                 right: eyeJoystickRight.right
                 bottom: eyeJoystickRight.top
-                bottomMargin: eyeJoystickRight.size/10
             }
 
             controller: rightEyebrowController
             rotationPoint: Item.Right
             antiClockWiseRotation: true
-            height: eyeJoystickRight.size/6
+            image: "qrc:/Resources/eyebrow.png"
+            mirrored: true
+            height: eyeJoystickRight.size/2.5
             width: eyeJoystickLeft.width
         }
 
@@ -143,7 +176,7 @@ Window {
                 horizontalCenter: snout.horizontalCenter
 
             }
-            y: (1 - mouthSlider.position) * 0.5 * height + snout.y + snout.height
+            y: (mouthSlider.position) * 0.5 * height + snout.y + snout.height
 
             Image {
                 id: mouthImage
@@ -155,14 +188,16 @@ Window {
         Slider {
             id: mouthSlider
             orientation: Qt.Vertical
-            value: 1.0
+            rotation: 180
+            value: 0.0
 
-            height: eyelidsSlider.height
+            height: inferiorEyelidsSlider.height * 1.3
 
             anchors{
                 top: snout.bottom
+                topMargin: -eyeJoystickRight.size/4
                 left: eyeJoystickRight.right
-                leftMargin: eyeJoystickRight.size/8
+                leftMargin: -eyeJoystickRight.size/8
             }
             stepSize: 0.01
             onMoved: mouthController.onPositionChanged(position)

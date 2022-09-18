@@ -11,7 +11,8 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
       m_communicationTimer(new QTimer(this)),
       m_eyesController(new JoystickController(this)),
       m_toolBarController(new ToolBarController(this)),
-      m_eyelidsController(new SliderController(this)),
+      m_superiorEyelidsController(new SliderController(this)),
+      m_inferiorEyelidsController(new SliderController(this)),
       m_leftEyebrowController(new LeverController(this)),
       m_rightEyebrowController(new LeverController(this)),
       m_mouthController(new SliderController),
@@ -49,9 +50,14 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
     });
 
     //EYELIDS:
-    connect(m_eyelidsController, &SliderController::sliderPositionChanged, m_eyelidsControl, [this](){
+    connect(m_superiorEyelidsController, &SliderController::sliderPositionChanged, m_eyelidsControl, [this](){
 
-        m_eyelidsControl->setPositionDegrees({m_eyelidsController->sliderPosition(), m_eyelidsController->sliderPosition()});
+        m_eyelidsControl->setPositionDegrees({m_superiorEyelidsController->sliderPosition(), m_inferiorEyelidsController->sliderPosition()});
+    });
+
+    connect(m_inferiorEyelidsController, &SliderController::sliderPositionChanged, m_eyelidsControl, [this](){
+
+        m_eyelidsControl->setPositionDegrees({m_superiorEyelidsController->sliderPosition(), m_inferiorEyelidsController->sliderPosition()});
     });
 
     //EYEBROWS:
@@ -180,9 +186,14 @@ SliderController *AnimatronicControl::mouthController() const
     return m_mouthController;
 }
 
-SliderController *AnimatronicControl::eyelidsController() const
+SliderController *AnimatronicControl::superiorEyelidsController() const
 {
-    return m_eyelidsController;
+    return m_superiorEyelidsController;
+}
+
+SliderController *AnimatronicControl::inferiorEyelidsController() const
+{
+    return m_inferiorEyelidsController;
 }
 
 LeverController *AnimatronicControl::leftEyebrowController() const

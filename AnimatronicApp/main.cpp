@@ -30,7 +30,8 @@ int main(int argc, char *argv[])
     // Brings controllers references to main context
     ToolBarController *toolBarController = animatronicControl.toolBarController();
     JoystickController *eyesController = animatronicControl.eyesController();
-    SliderController *eyelidsController = animatronicControl.eyelidsController();
+    SliderController *superiorEyelidsController = animatronicControl.superiorEyelidsController();
+    SliderController *inferiorEyelidsController = animatronicControl.inferiorEyelidsController();
     LeverController *leftEyebrowController = animatronicControl.leftEyebrowController();
     LeverController *rightEyebrowController = animatronicControl.rightEyebrowController();
     SliderController *mouthController = animatronicControl.mouthController();
@@ -40,7 +41,8 @@ int main(int argc, char *argv[])
     // Injects controllers context into qml side
     engine.rootContext()->setContextProperty(QStringLiteral("eyesController"), eyesController);
     engine.rootContext()->setContextProperty(QStringLiteral("toolbarController"), toolBarController);
-    engine.rootContext()->setContextProperty(QStringLiteral("eyelidsController"), eyelidsController);
+    engine.rootContext()->setContextProperty(QStringLiteral("superiorEyelidsController"), superiorEyelidsController);
+    engine.rootContext()->setContextProperty(QStringLiteral("inferiorEyelidsController"), inferiorEyelidsController);
     engine.rootContext()->setContextProperty(QStringLiteral("leftEyebrowController"), leftEyebrowController);
     engine.rootContext()->setContextProperty(QStringLiteral("rightEyebrowController"), rightEyebrowController);
     engine.rootContext()->setContextProperty(QStringLiteral("mouthController"), mouthController);

@@ -40,7 +40,13 @@ public:
      * @brief Gets the eyelids controller instance
      * @return eyelidsController
      */
-    SliderController *eyelidsController() const;
+    SliderController *superiorEyelidsController() const;
+
+    /**
+     * @brief Gets the eyelids controller instance
+     * @return eyelidsController
+     */
+    SliderController *inferiorEyelidsController() const;
 
     /**
      * @brief Gets the left eyebrow controller instance
@@ -105,7 +111,8 @@ private:
     QTimer *m_communicationTimer;
     JoystickController *m_eyesController;
     ToolBarController *m_toolBarController;
-    SliderController *m_eyelidsController;
+    SliderController *m_superiorEyelidsController;
+    SliderController *m_inferiorEyelidsController;
     LeverController *m_leftEyebrowController;
     LeverController *m_rightEyebrowController;
     SliderController *m_mouthController;

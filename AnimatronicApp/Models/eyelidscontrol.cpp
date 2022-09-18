@@ -12,7 +12,7 @@ EyelidsControl::EyelidsControl(QObject *parent)
       m_positionDegrees({SUPERIOR_MAX_DEG_VALUE/2, INFERIOR_MAX_DEG_VALUE/2}),
       m_positionCenterOffsetDegrees({0.f,0.f}),
       m_blinkTimer(new QTimer(this)),
-      m_isBlinking(false)
+      m_isBlinking(true)
 {
     m_blinkTimer->setSingleShot(true);
     connect(m_blinkTimer, &QTimer::timeout, this, &EyelidsControl::blink);
@@ -21,8 +21,15 @@ EyelidsControl::EyelidsControl(QObject *parent)
 
 QPair<float,float> EyelidsControl::positionDegrees() const
 {
-    return QPair<float,float>({m_positionDegrees.first + 0.15f*m_positionCenterOffsetDegrees.first,
-            m_positionDegrees.second - 0.15f*m_positionCenterOffsetDegrees.second});
+    if(m_isBlinking)
+    {
+        return QPair<float,float>({m_positionDegrees.first + 0.15f*m_positionCenterOffsetDegrees.first,
+                m_positionDegrees.second - 0.15f*m_positionCenterOffsetDegrees.second});
+    }
+    else
+    {
+        return {0.f, 0.f};
+    }
 }
 
 void EyelidsControl::setPositionDegrees(QPair<float,float> newPosition)
@@ -37,17 +44,10 @@ void EyelidsControl::blink()
 {
     if(m_isBlinking)
     {
-        m_lastPositionDegrees = m_positionDegrees;
-        m_lastPositionCenterOffsetDegrees = m_positionCenterOffsetDegrees;
-        m_positionDegrees = {0.f, 0.f};
-        m_positionCenterOffsetDegrees = {0.f, 0.f};
-
         m_blinkTimer->start(200);
     }
     else
     {
-        m_positionDegrees = m_lastPositionDegrees;
-        m_positionCenterOffsetDegrees = m_lastPositionCenterOffsetDegrees;
         m_blinkTimer->start(2000 + QRandomGenerator::global()->generateDouble() * 3000);
     }
 

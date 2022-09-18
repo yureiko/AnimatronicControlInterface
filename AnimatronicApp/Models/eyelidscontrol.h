@@ -55,8 +55,6 @@ private:
     QPair<float,float> m_positionCenterOffsetDegrees;
 
     QTimer *m_blinkTimer;
-    QPair<float,float> m_lastPositionDegrees;
-    QPair<float,float> m_lastPositionCenterOffsetDegrees;
     bool m_isBlinking;
 };
 

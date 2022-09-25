@@ -4,7 +4,7 @@ import QtQuick.Controls 2.15
 import controllers 1.0
 
 Window {
-    property real proportion: 4/3
+    property real proportion: 4/4
 
     id: window
     visible: true
@@ -27,6 +27,7 @@ Window {
             id: toolbar
         }
 
+/****** EYES: ***********************************************/
         CustomJoystick {
             id: eyeJoystickLeft
             controller: eyesController
@@ -57,6 +58,7 @@ Window {
             cursorImage: "qrc:/Resources/iris.png"
         }
 
+/****** EYELIDS: ********************************************/
         Slider {
             id: superiorEyelidsSlider
             orientation: Qt.Vertical
@@ -100,9 +102,13 @@ Window {
                 left: superiorEyelidsSlider.right
             }
             stepSize: 0.01
-            onMoved: superiorEyelidsController.onPositionChanged(position)
+            onMoved: {
+                superiorEyelidsController.onPositionChanged(position);
+                inferiorEyelidsController.onPositionChanged(position);
+            }
         }
 
+/****** EYEBROWS: *******************************************/
         CustomLever {
             id: eyeBrowLeft
             anchors{
@@ -135,6 +141,7 @@ Window {
             width: eyeJoystickLeft.width
         }
 
+/****** SNOUT ALIGMENT: *************************************/
         Rectangle {
             id: centerEyesReference
             anchors{
@@ -165,6 +172,7 @@ Window {
             }
         }
 
+/****** MOUTH: **********************************************/
         Rectangle{
             id: mouth
             width: snout.width*0.65
@@ -199,9 +207,10 @@ Window {
                 leftMargin: -eyeJoystickRight.size/8
             }
             stepSize: 0.01
-            onMoved: mouthController.onPositionChanged(position)
+            onMoved: mouthController.onPositionChanged(1.0 - position)
         }
 
+/****** EYELIDS ANIMATION: **********************************/
         Image{
             id: leftSuperiorEyelidAnimation
             source: "qrc:/Resources/eyelidClosed100.svg"
@@ -219,8 +228,8 @@ Window {
                 top: eyeJoystickRight.top
                 horizontalCenter: eyeJoystickRight.horizontalCenter
             }
-            height: (1 - superiorEyelidsSlider.value * 0.7) * eyeJoystickRight.size/2
-            width: 2 * pow(pow(eyeJoystickRight.width/2, 2) - pow((height - eyeJoystickRight.size/2),2), 0.5)
+            height: (1 - superiorEyelidsSlider.value * 0.7) * eyeJoystickLeft.size/2
+            width: eyeJoystickRight.width - superiorEyelidsSlider.value * eyeJoystickRight.size/6
         }
         Image{
             id: leftInferiorEyelidAnimation

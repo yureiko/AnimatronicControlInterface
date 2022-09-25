@@ -219,8 +219,8 @@ Window {
                 top: eyeJoystickRight.top
                 horizontalCenter: eyeJoystickRight.horizontalCenter
             }
-            height: (1 - superiorEyelidsSlider.value * 0.7) * eyeJoystickLeft.size/2
-            width: eyeJoystickRight.width - superiorEyelidsSlider.value * eyeJoystickRight.size/6
+            height: (1 - superiorEyelidsSlider.value * 0.7) * eyeJoystickRight.size/2
+            width: 2 * pow(pow(eyeJoystickRight.width/2, 2) - pow((height - eyeJoystickRight.size/2),2), 0.5)
         }
         Image{
             id: leftInferiorEyelidAnimation

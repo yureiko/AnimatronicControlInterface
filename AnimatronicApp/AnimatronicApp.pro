@@ -1,4 +1,4 @@
-QT += qml scxml serialport
+QT += qml serialport
 
 CONFIG += c++11
 

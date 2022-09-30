@@ -4,7 +4,7 @@ import QtQuick.Controls 2.15
 import controllers 1.0
 
 Window {
-    property real proportion: 4/4
+    property real proportion: 16/9
 
     id: window
     visible: true
@@ -108,6 +108,15 @@ Window {
             }
         }
 
+        Text {
+            id: eyelidsDescription
+            text: qsTr("Pálpebras")
+            anchors{
+                bottom: superiorEyelidsSlider.top
+                left: superiorEyelidsSlider.left
+            }
+        }
+
 /****** EYEBROWS: *******************************************/
         CustomLever {
             id: eyeBrowLeft
@@ -208,6 +217,15 @@ Window {
             }
             stepSize: 0.01
             onMoved: mouthController.onPositionChanged(1.0 - position)
+        }
+
+        Text {
+            id: mouthDescription
+            text: qsTr("Boca")
+            anchors{
+                bottom: mouthSlider.top
+                horizontalCenter: mouthSlider.horizontalCenter
+            }
         }
 
 /****** EYELIDS ANIMATION: **********************************/

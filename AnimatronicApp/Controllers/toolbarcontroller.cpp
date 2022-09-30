@@ -2,6 +2,7 @@
 
 ToolBarController::ToolBarController(QObject *parent)
     : QObject(parent),
+      m_bluetoothDeviceDiscoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
       m_serialPortOpenButtonText("Open"),
       m_isSerialPortOpen(false),
       m_timer(new QTimer(this))
@@ -11,6 +12,11 @@ ToolBarController::ToolBarController(QObject *parent)
     // Timer will check every second for new available ports
     connect(m_timer, &QTimer::timeout, this, &ToolBarController::scanSerialPorts);
     m_timer->start(1000);
+
+    connect(m_bluetoothDeviceDiscoveryAgent, &QBluetoothDeviceDiscoveryAgent::deviceDiscovered,
+            this, &ToolBarController::bluetoothDevicedDiscovered);
+
+    m_bluetoothDeviceDiscoveryAgent->start();
 }
 
 const QVariantList &ToolBarController::availablePortsList() const
@@ -33,6 +39,11 @@ void ToolBarController::onOpenSerialPortPressed(int currentIndex)
     {
         emit serialPortCloseRequested();
     }
+}
+
+void ToolBarController::bluetoothDevicedDiscovered(const QBluetoothDeviceInfo &newDevice)
+{
+    m_availableBTDevicesList.append(newDevice.name());
 }
 
 void ToolBarController::scanSerialPorts()

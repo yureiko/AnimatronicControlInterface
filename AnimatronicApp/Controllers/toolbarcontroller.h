@@ -5,6 +5,9 @@
 #include <QVariantList>
 #include <QSerialPortInfo>
 #include <QTimer>
+#include <QBluetoothDeviceDiscoveryAgent>
+#include <QtBluetooth>
+#include <QPointer>
 
 /**
  * @brief The ToolBarController class provides a controller for a ToolBar view
@@ -79,12 +82,15 @@ public slots:
 
 private:
 
+    void bluetoothDevicedDiscovered(const QBluetoothDeviceInfo &newDevice);
     /**
      * @brief scan for serial ports
      */
     void scanSerialPorts();
 
     QVariantList m_availablePortsList;
+    QVariantList m_availableBTDevicesList;
+    QPointer<QBluetoothDeviceDiscoveryAgent> m_bluetoothDeviceDiscoveryAgent;
     QString m_serialPortOpenButtonText;
     bool m_isSerialPortOpen;
     QTimer *m_timer;

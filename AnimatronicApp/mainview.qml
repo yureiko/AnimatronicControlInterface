@@ -27,6 +27,26 @@ Window {
             id: toolbar
         }
 
+        Text {
+            id: appTitle
+            anchors{
+                top: toolbar.bottom
+                topMargin: 16
+                horizontalCenter: parent.horizontalCenter
+            }
+            font{
+                pixelSize: 24
+                bold: true
+            }
+            color: "gray"
+
+            text: qsTr("")
+        }
+
+        Button {
+
+        }
+
 /****** EYES: ***********************************************/
         CustomJoystick {
             id: eyeJoystickLeft
@@ -34,7 +54,7 @@ Window {
             backgroundColor: "white"
             anchors{
                 top: toolbar.bottom
-                topMargin: 100
+                topMargin: 180
                 left: background.left
                 leftMargin: 60
 
@@ -236,7 +256,7 @@ Window {
                 top: eyeJoystickLeft.top
                 horizontalCenter: eyeJoystickLeft.horizontalCenter
             }
-            height: (1 - superiorEyelidsSlider.value * 0.7) * eyeJoystickLeft.size/2
+            height: (1 - superiorEyelidsSlider.value * 0.6) * eyeJoystickLeft.size/2
             width: eyeJoystickLeft.width - superiorEyelidsSlider.value * eyeJoystickLeft.size/6
         }
         Image{
@@ -246,7 +266,7 @@ Window {
                 top: eyeJoystickRight.top
                 horizontalCenter: eyeJoystickRight.horizontalCenter
             }
-            height: (1 - superiorEyelidsSlider.value * 0.7) * eyeJoystickLeft.size/2
+            height: (1 - superiorEyelidsSlider.value * 0.6) * eyeJoystickLeft.size/2
             width: eyeJoystickRight.width - superiorEyelidsSlider.value * eyeJoystickRight.size/6
         }
         Image{
@@ -256,7 +276,7 @@ Window {
                 bottom: eyeJoystickLeft.bottom
                 horizontalCenter: eyeJoystickLeft.horizontalCenter
             }
-            height: (1 - inferiorEyelidsSlider.value * 0.7) * eyeJoystickLeft.size/2
+            height: (1 - inferiorEyelidsSlider.value * 0.6) * eyeJoystickLeft.size/2
             width: eyeJoystickLeft.width - inferiorEyelidsSlider.value *  eyeJoystickLeft.size/6
             rotation: 180
         }
@@ -267,7 +287,7 @@ Window {
                 bottom: eyeJoystickRight.bottom
                 horizontalCenter: eyeJoystickRight.horizontalCenter
             }
-            height: (1 - inferiorEyelidsSlider.value * 0.7) * eyeJoystickLeft.size/2
+            height: (1 - inferiorEyelidsSlider.value * 0.6) * eyeJoystickLeft.size/2
             width: eyeJoystickRight.width - inferiorEyelidsSlider.value * eyeJoystickRight.size/6
             rotation: 180
         }

@@ -5,6 +5,7 @@
 #include <QSerialPort>
 #include <QObject>
 #include <QByteArray>
+#include <QBluetoothSocket>
 
 /**
  * @brief The CommunicationThread class provides the bridge between the hardware controller and the application

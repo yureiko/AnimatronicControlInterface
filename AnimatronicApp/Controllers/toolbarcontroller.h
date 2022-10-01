@@ -66,6 +66,8 @@ signals:
      */
     void serialPortOpenRequested(QString portName);
 
+    void btDeviceConnectionRequested(QBluetoothDeviceInfo deviceInfo);
+
     /**
      * @brief notifies when serial port close has requested
      * @param portName
@@ -80,6 +82,8 @@ public slots:
      */
     Q_INVOKABLE void onOpenSerialPortPressed(int currentIndex);
 
+    Q_INVOKABLE void onBTEnabledPressed(bool checked);
+
 private:
 
     void bluetoothDevicedDiscovered(const QBluetoothDeviceInfo &newDevice);
@@ -90,9 +94,11 @@ private:
 
     QVariantList m_availablePortsList;
     QVariantList m_availableBTDevicesList;
+    QHash<QString,QBluetoothDeviceInfo> m_bluetoothDeviceInfoTable;
     QPointer<QBluetoothDeviceDiscoveryAgent> m_bluetoothDeviceDiscoveryAgent;
     QString m_serialPortOpenButtonText;
     bool m_isSerialPortOpen;
+    bool m_btEnabled;
     QTimer *m_timer;
 };
 

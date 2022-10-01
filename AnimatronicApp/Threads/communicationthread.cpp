@@ -1,4 +1,5 @@
 #include "communicationthread.h"
+#include <QBluetoothDeviceInfo>
 #include <QDebug>
 
 #define DATA_START_MESSAGE_FLAG 0xAA
@@ -8,6 +9,7 @@
 CommunicationThread::CommunicationThread(QObject *parent)
     : QThread(parent),
       m_serialPort(new QSerialPort(this)),
+      m_btSocket(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this)),
       m_quit(false)
 {
     m_serialPort->setBaudRate(QSerialPort::Baud115200);
@@ -15,23 +17,42 @@ CommunicationThread::CommunicationThread(QObject *parent)
     m_serialPort->setParity(QSerialPort::EvenParity);
     m_serialPort->setStopBits(QSerialPort::OneStop);
     m_serialPort->setFlowControl(QSerialPort::NoFlowControl);
+
+    connect(m_btSocket, &QBluetoothSocket::connected,
+            this, &CommunicationThread::serialPortOpened);
+
+    connect(m_btSocket, &QBluetoothSocket::disconnected,
+            this, &CommunicationThread::serialPortClosed);
 }
 
 void CommunicationThread::run()
 {
     m_quit = false;
 
-    m_serialPort->clear();
+    //m_serialPort->clear();
 
     while(!m_quit)
     {
-        if(!m_dataOut.isEmpty() && m_serialPort->isWritable())
+        if(m_serialPort->isOpen())
         {
-            QByteArray dataSend = m_dataOut.takeFirst();
+            if(!m_dataOut.isEmpty() && m_serialPort->isWritable())
+            {
+                QByteArray dataSend = m_dataOut.takeFirst();
 
-            m_serialPort->write(dataSend);
-            m_serialPort->waitForBytesWritten(5);
+                m_serialPort->write(dataSend);
+                m_serialPort->waitForBytesWritten(5);
 
+            }
+        }
+        else if(m_btSocket->isOpen())
+        {
+            if(!m_dataOut.isEmpty() && m_btSocket->isWritable())
+            {
+                QByteArray dataSend = m_dataOut.takeFirst();
+
+                m_btSocket->write(dataSend);
+                m_btSocket->waitForBytesWritten(5);
+            }
         }
         QThread::msleep(1);
     }
@@ -70,6 +91,14 @@ void CommunicationThread::openSerialPort(QString portName)
             this->start();
         }
     }
+}
+
+void CommunicationThread::openBTSocket(const QBluetoothDeviceInfo &device)
+{
+    m_btSocket->connectToService(QBluetoothAddress(device.address()),
+                                 QBluetoothUuid(QBluetoothUuid::SerialPort));
+
+    this->start();
 }
 
 void CommunicationThread::closeSerialPort()

@@ -5,6 +5,7 @@ ToolBarController::ToolBarController(QObject *parent)
       m_bluetoothDeviceDiscoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
       m_serialPortOpenButtonText("Open"),
       m_isSerialPortOpen(false),
+      m_btEnabled(false),
       m_timer(new QTimer(this))
 {
     scanSerialPorts();
@@ -21,7 +22,14 @@ ToolBarController::ToolBarController(QObject *parent)
 
 const QVariantList &ToolBarController::availablePortsList() const
 {
-    return m_availablePortsList;
+    if(m_btEnabled)
+    {
+        return m_availableBTDevicesList;
+    }
+    else
+    {
+        return m_availablePortsList;
+    }
 }
 
 void ToolBarController::onOpenSerialPortPressed(int currentIndex)
@@ -33,7 +41,14 @@ void ToolBarController::onOpenSerialPortPressed(int currentIndex)
 
     if(!m_isSerialPortOpen)
     {
-        emit serialPortOpenRequested(m_availablePortsList.at(currentIndex).toString());
+        if(m_btEnabled)
+        {
+            emit btDeviceConnectionRequested(m_bluetoothDeviceInfoTable[m_availableBTDevicesList.at(currentIndex).toString()]);
+        }
+        else
+        {
+            emit serialPortOpenRequested(m_availablePortsList.at(currentIndex).toString());
+        }
     }
     else
     {
@@ -41,9 +56,19 @@ void ToolBarController::onOpenSerialPortPressed(int currentIndex)
     }
 }
 
+void ToolBarController::onBTEnabledPressed(bool checked)
+{
+    if(m_btEnabled != checked)
+    {
+        m_btEnabled = checked;
+    }
+}
+
 void ToolBarController::bluetoothDevicedDiscovered(const QBluetoothDeviceInfo &newDevice)
 {
     m_availableBTDevicesList.append(newDevice.name());
+    m_bluetoothDeviceInfoTable.insert(newDevice.name(), newDevice);
+    emit availablePortsListChanged();
 }
 
 void ToolBarController::scanSerialPorts()

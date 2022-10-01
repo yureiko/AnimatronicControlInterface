@@ -38,6 +38,8 @@ public slots:
      */
     void openSerialPort(QString portName);
 
+    void openBTSocket(const QBluetoothDeviceInfo &device);
+
     /**
      * @brief closes the selected serial port
      * @param portName
@@ -58,6 +60,7 @@ signals:
 private:
     QSerialPort *m_serialPort;
     QVector<QByteArray> m_dataOut;
+    QBluetoothSocket *m_btSocket;
     bool m_quit;
 };
 

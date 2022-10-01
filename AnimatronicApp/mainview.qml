@@ -27,26 +27,6 @@ Window {
             id: toolbar
         }
 
-        Text {
-            id: appTitle
-            anchors{
-                top: toolbar.bottom
-                topMargin: 16
-                horizontalCenter: parent.horizontalCenter
-            }
-            font{
-                pixelSize: 24
-                bold: true
-            }
-            color: "gray"
-
-            text: qsTr("")
-        }
-
-        Button {
-
-        }
-
 /****** EYES: ***********************************************/
         CustomJoystick {
             id: eyeJoystickLeft

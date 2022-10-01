@@ -25,6 +25,9 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
     connect(m_toolBarController, &ToolBarController::serialPortOpenRequested,
             m_communicationThread, &CommunicationThread::openSerialPort);
 
+    connect(m_toolBarController, &ToolBarController::btDeviceConnectionRequested,
+            m_communicationThread, &CommunicationThread::openBTSocket);
+
     connect(m_toolBarController, &ToolBarController::serialPortCloseRequested,
             m_communicationThread, &CommunicationThread::closeSerialPort);
 

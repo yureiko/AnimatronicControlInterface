@@ -46,6 +46,7 @@ public slots:
      */
     void closeSerialPort();
 
+    void closeBTSocket();
 signals:
     /**
      * @brief notifies when the serial port opened
@@ -60,7 +61,7 @@ signals:
 private:
     QSerialPort *m_serialPort;
     QVector<QByteArray> m_dataOut;
-    QBluetoothSocket *m_btSocket;
+    QScopedPointer<QBluetoothSocket> m_btSocket;
     bool m_quit;
 };
 

@@ -17,6 +17,7 @@ class ToolBarController : public QObject
     Q_OBJECT
     Q_PROPERTY(QVariantList ui_availablePortsList READ availablePortsList NOTIFY availablePortsListChanged)
     Q_PROPERTY(QString ui_serialPortOpenButtonText READ serialPortOpenButtonText NOTIFY serialPortOpenButtonTextChanged)
+    Q_PROPERTY(bool ui_btConnectionCheckBoxEnabled READ btConnectionCheckBoxEnabled NOTIFY btConnectionCheckBoxEnabledChanged)
 
 public:
     /**
@@ -49,6 +50,8 @@ public:
      */
     void setIsSerialPortOpen(bool newIsSerialPortOpen);
 
+    bool btConnectionCheckBoxEnabled() const;
+
 signals:
     /**
      * @brief notifies when available ports list changed
@@ -73,6 +76,10 @@ signals:
      * @param portName
      */
     void serialPortCloseRequested();
+
+    void btDeviceDisconnectionRequested();
+
+    void btConnectionCheckBoxEnabledChanged();
 
 public slots:
 
@@ -99,6 +106,7 @@ private:
     QString m_serialPortOpenButtonText;
     bool m_isSerialPortOpen;
     bool m_btEnabled;
+    bool m_btConnectionCheckBoxEnabled;
     QTimer *m_timer;
 };
 

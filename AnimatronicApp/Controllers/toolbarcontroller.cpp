@@ -6,6 +6,7 @@ ToolBarController::ToolBarController(QObject *parent)
       m_serialPortOpenButtonText("Open"),
       m_isSerialPortOpen(false),
       m_btEnabled(false),
+      m_btConnectionCheckBoxEnabled(true),
       m_timer(new QTimer(this))
 {
     scanSerialPorts();
@@ -49,10 +50,23 @@ void ToolBarController::onOpenSerialPortPressed(int currentIndex)
         {
             emit serialPortOpenRequested(m_availablePortsList.at(currentIndex).toString());
         }
+
+        m_btConnectionCheckBoxEnabled = false;
+        emit btConnectionCheckBoxEnabledChanged();
     }
     else
     {
-        emit serialPortCloseRequested();
+        if(m_btEnabled)
+        {
+            emit btDeviceDisconnectionRequested();
+        }
+        else
+        {
+            emit serialPortCloseRequested();
+        }
+
+        m_btConnectionCheckBoxEnabled = true;
+        emit btConnectionCheckBoxEnabledChanged();
     }
 }
 
@@ -61,6 +75,17 @@ void ToolBarController::onBTEnabledPressed(bool checked)
     if(m_btEnabled != checked)
     {
         m_btEnabled = checked;
+
+        if(m_btEnabled)
+        {
+            m_timer->stop();
+        }
+        else
+        {
+            m_timer->start(1000);
+        }
+
+        emit availablePortsListChanged();
     }
 }
 
@@ -84,6 +109,11 @@ void ToolBarController::scanSerialPorts()
     }
 
     emit availablePortsListChanged();
+}
+
+bool ToolBarController::btConnectionCheckBoxEnabled() const
+{
+    return m_btConnectionCheckBoxEnabled;
 }
 
 bool ToolBarController::isSerialPortOpen() const

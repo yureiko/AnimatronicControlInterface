@@ -9,7 +9,7 @@
 CommunicationThread::CommunicationThread(QObject *parent)
     : QThread(parent),
       m_serialPort(new QSerialPort(this)),
-      m_btSocket(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this)),
+      m_btSocket(nullptr),
       m_quit(false)
 {
     m_serialPort->setBaudRate(QSerialPort::Baud115200);
@@ -17,19 +17,16 @@ CommunicationThread::CommunicationThread(QObject *parent)
     m_serialPort->setParity(QSerialPort::EvenParity);
     m_serialPort->setStopBits(QSerialPort::OneStop);
     m_serialPort->setFlowControl(QSerialPort::NoFlowControl);
-
-    connect(m_btSocket, &QBluetoothSocket::connected,
-            this, &CommunicationThread::serialPortOpened);
-
-    connect(m_btSocket, &QBluetoothSocket::disconnected,
-            this, &CommunicationThread::serialPortClosed);
 }
 
 void CommunicationThread::run()
 {
     m_quit = false;
 
-    //m_serialPort->clear();
+    if(m_serialPort->isOpen())
+    {
+        m_serialPort->clear();
+    }
 
     while(!m_quit)
     {
@@ -95,6 +92,14 @@ void CommunicationThread::openSerialPort(QString portName)
 
 void CommunicationThread::openBTSocket(const QBluetoothDeviceInfo &device)
 {
+    m_btSocket.reset(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this));
+
+    connect(m_btSocket.data(), &QBluetoothSocket::connected,
+            this, &CommunicationThread::serialPortOpened);
+
+    connect(m_btSocket.data(), &QBluetoothSocket::disconnected,
+            this, &CommunicationThread::serialPortClosed);
+
     m_btSocket->connectToService(QBluetoothAddress(device.address()),
                                  QBluetoothUuid(QBluetoothUuid::SerialPort));
 
@@ -110,5 +115,14 @@ void CommunicationThread::closeSerialPort()
         m_serialPort->close();
 
         emit serialPortClosed();
+    }
+}
+
+void CommunicationThread::closeBTSocket()
+{
+    if(m_btSocket && m_btSocket->isOpen())
+    {
+        m_quit = true;
+        m_btSocket->disconnectFromService();
     }
 }

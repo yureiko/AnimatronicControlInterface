@@ -31,6 +31,9 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
     connect(m_toolBarController, &ToolBarController::serialPortCloseRequested,
             m_communicationThread, &CommunicationThread::closeSerialPort);
 
+    connect(m_toolBarController, &ToolBarController::btDeviceDisconnectionRequested,
+            m_communicationThread, &CommunicationThread::closeBTSocket);
+
     //COMMUNICATION TIMER
     connect(m_communicationTimer, &QTimer::timeout, this, &AnimatronicControl::sendPositions);
 
@@ -176,7 +179,7 @@ void AnimatronicControl::sendPositions()
 
 void AnimatronicControl::startCommunicationTimer()
 {
-    m_communicationTimer->start(2);
+    m_communicationTimer->start(10);
 }
 
 void AnimatronicControl::stopCommunicationTimer()

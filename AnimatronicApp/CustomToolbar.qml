@@ -41,6 +41,7 @@ Rectangle {
 
     CheckBox{
         id: btEnabled
+        enabled: toolbarController.ui_btConnectionCheckBoxEnabled
 
         anchors{
             left: serialPortOpenButton.right

@@ -48,6 +48,7 @@ Rectangle {
         }
 
         text: qsTr("Conexão bluetooth")
+        checked: true
 
         onClicked: toolbarController.onBTEnabledPressed(checked);
     }

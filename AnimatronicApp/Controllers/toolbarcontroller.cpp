@@ -5,7 +5,7 @@ ToolBarController::ToolBarController(QObject *parent)
       m_bluetoothDeviceDiscoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
       m_serialPortOpenButtonText("Open"),
       m_isSerialPortOpen(false),
-      m_btEnabled(false),
+      m_btEnabled(true),
       m_btConnectionCheckBoxEnabled(true),
       m_timer(new QTimer(this))
 {

@@ -2,10 +2,6 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "Models/animatroniccontrol.h"
-#include "Controllers/joystickcontroller.h"
-#include "Controllers/toolbarcontroller.h"
-#include "Controllers/slidercontroller.h"
-#include "Controllers/levercontroller.h"
 
 /**
  * @brief This application follows the MVC architecture, when the models are terminated by "control" sufix
@@ -35,6 +31,7 @@ int main(int argc, char *argv[])
     LeverController *leftEyebrowController = animatronicControl.leftEyebrowController();
     LeverController *rightEyebrowController = animatronicControl.rightEyebrowController();
     SliderController *mouthController = animatronicControl.mouthController();
+    EmotionsButtonGradeController *emotionsButtonGradeController = animatronicControl.emotionsButtonGradeController();
 
     QQmlApplicationEngine engine;
 
@@ -46,6 +43,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty(QStringLiteral("leftEyebrowController"), leftEyebrowController);
     engine.rootContext()->setContextProperty(QStringLiteral("rightEyebrowController"), rightEyebrowController);
     engine.rootContext()->setContextProperty(QStringLiteral("mouthController"), mouthController);
+    engine.rootContext()->setContextProperty(QStringLiteral("emotionsButtonGradeController"), emotionsButtonGradeController);
 
     engine.load(QUrl(QStringLiteral("qrc:/Views/mainview.qml")));
     if (engine.rootObjects().isEmpty())

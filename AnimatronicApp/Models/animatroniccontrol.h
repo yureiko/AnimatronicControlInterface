@@ -2,6 +2,7 @@
 #define ANIMATRONICCONTROL_H
 
 #include <QObject>
+#include <Controllers/emotionsbuttongradecontroller.h>
 #include "Controllers/joystickcontroller.h"
 #include "Controllers/toolbarcontroller.h"
 #include "Controllers/slidercontroller.h"
@@ -66,6 +67,8 @@ public:
      */
     SliderController *mouthController() const;
 
+    EmotionsButtonGradeController *emotionsButtonGradeController() const;
+
 private:
 
     /**
@@ -116,6 +119,7 @@ private:
     LeverController *m_leftEyebrowController;
     LeverController *m_rightEyebrowController;
     SliderController *m_mouthController;
+    EmotionsButtonGradeController *m_emotionsButtonGradeController;
 
     EyesControl *m_eyesControl;
     EyelidsControl *m_eyelidsControl;

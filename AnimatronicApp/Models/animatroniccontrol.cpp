@@ -15,7 +15,8 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
       m_inferiorEyelidsController(new SliderController(this)),
       m_leftEyebrowController(new LeverController(this)),
       m_rightEyebrowController(new LeverController(this)),
-      m_mouthController(new SliderController),
+      m_mouthController(new SliderController(this)),
+      m_emotionsButtonGradeController(new EmotionsButtonGradeController(this)),
       m_eyesControl(new EyesControl(this)),
       m_eyelidsControl(new EyelidsControl(this)),
       m_eyebrowsControl(new EyebrowsControl(this)),
@@ -185,6 +186,11 @@ void AnimatronicControl::startCommunicationTimer()
 void AnimatronicControl::stopCommunicationTimer()
 {
     m_communicationTimer->stop();
+}
+
+EmotionsButtonGradeController *AnimatronicControl::emotionsButtonGradeController() const
+{
+    return m_emotionsButtonGradeController;
 }
 
 SliderController *AnimatronicControl::mouthController() const

@@ -4,5 +4,6 @@
         <file>CustomJoystick.qml</file>
         <file>CustomToolbar.qml</file>
         <file>CustomLever.qml</file>
+        <file>ButtonGrade.qml</file>
     </qresource>
 </RCC>

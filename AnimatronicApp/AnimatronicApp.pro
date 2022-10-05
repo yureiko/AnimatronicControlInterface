@@ -7,6 +7,7 @@ RESOURCES += \
     animatronic-qml.qrc
 
 HEADERS += \
+    Controllers/emotionsbuttongradecontroller.h \
     Controllers/levercontroller.h \
     Controllers/slidercontroller.h \
     Controllers/toolbarcontroller.h \
@@ -19,6 +20,7 @@ HEADERS += \
     Controllers/joystickcontroller.h
 
 SOURCES += \
+    Controllers/emotionsbuttongradecontroller.cpp \
     Controllers/levercontroller.cpp \
     Controllers/slidercontroller.cpp \
     Controllers/toolbarcontroller.cpp \

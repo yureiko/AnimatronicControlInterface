@@ -27,7 +27,7 @@ Window {
             id: toolbar
         }
 
-/****** EYES: ***********************************************/
+        /****** EYES: ***********************************************/
         CustomJoystick {
             id: eyeJoystickLeft
             controller: eyesController
@@ -58,7 +58,7 @@ Window {
             cursorImage: "qrc:/Resources/iris.png"
         }
 
-/****** EYELIDS: ********************************************/
+        /****** EYELIDS: ********************************************/
         Slider {
             id: superiorEyelidsSlider
             orientation: Qt.Vertical
@@ -114,10 +114,11 @@ Window {
             anchors{
                 bottom: superiorEyelidsSlider.top
                 left: superiorEyelidsSlider.left
+                leftMargin: 16
             }
         }
 
-/****** EYEBROWS: *******************************************/
+        /****** EYEBROWS: *******************************************/
         CustomLever {
             id: eyeBrowLeft
             anchors{
@@ -150,7 +151,7 @@ Window {
             width: eyeJoystickLeft.width
         }
 
-/****** SNOUT ALIGMENT: *************************************/
+        /****** SNOUT ALIGMENT: *************************************/
         Rectangle {
             id: centerEyesReference
             anchors{
@@ -181,7 +182,7 @@ Window {
             }
         }
 
-/****** MOUTH: **********************************************/
+        /****** MOUTH: **********************************************/
         Rectangle{
             id: mouth
             width: snout.width*0.65
@@ -228,7 +229,7 @@ Window {
             }
         }
 
-/****** EYELIDS ANIMATION: **********************************/
+        /****** EYELIDS ANIMATION: **********************************/
         Image{
             id: leftSuperiorEyelidAnimation
             source: "qrc:/Resources/eyelidClosed100.svg"
@@ -270,6 +271,17 @@ Window {
             height: (1 - inferiorEyelidsSlider.value * 0.6) * eyeJoystickLeft.size/2
             width: eyeJoystickRight.width - inferiorEyelidsSlider.value * eyeJoystickRight.size/6
             rotation: 180
+        }
+        /****** EMOTIONS CONTROL: **********************************/
+
+        ButtonGrade {
+            spacing: 16
+            anchors{
+                horizontalCenter: snout.horizontalCenter
+                top: snout.bottom
+                topMargin: 100
+            }
+            controller: emotionsButtonGradeController
         }
     }
 }

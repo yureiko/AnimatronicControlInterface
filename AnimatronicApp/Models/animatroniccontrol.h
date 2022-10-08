@@ -12,6 +12,7 @@
 #include "eyelidscontrol.h"
 #include "eyebrowscontrol.h"
 #include "mouthcontrol.h"
+#include "emotionscontrol.h"
 
 /**
  * @brief The AnimatronicControl class manage all animatronic parts
@@ -125,6 +126,7 @@ private:
     EyelidsControl *m_eyelidsControl;
     EyebrowsControl *m_eyebrowsControl;
     MouthControl *m_mouthControl;
+    EmotionsControl *m_emotionsControl;
 };
 
 #endif // ANIMATRONICCONTROL_H

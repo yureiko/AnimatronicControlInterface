@@ -20,7 +20,8 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
       m_eyesControl(new EyesControl(this)),
       m_eyelidsControl(new EyelidsControl(this)),
       m_eyebrowsControl(new EyebrowsControl(this)),
-      m_mouthControl(new MouthControl(this))
+      m_mouthControl(new MouthControl(this)),
+      m_emotionsControl(new EmotionsControl(this))
 {
     //TOOLBAR:
     connect(m_toolBarController, &ToolBarController::serialPortOpenRequested,
@@ -35,10 +36,10 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
     connect(m_toolBarController, &ToolBarController::btDeviceDisconnectionRequested,
             m_communicationThread, &CommunicationThread::closeBTSocket);
 
-    //COMMUNICATION TIMER
+    //COMMUNICATION TIMER:
     connect(m_communicationTimer, &QTimer::timeout, this, &AnimatronicControl::sendPositions);
 
-    //COMMUNICATION THREAD
+    //COMMUNICATION THREAD:
     connect(m_communicationThread, &CommunicationThread::serialPortOpened, m_toolBarController, [this](){
         m_toolBarController->setIsSerialPortOpen(true);
         startCommunicationTimer();
@@ -78,11 +79,18 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
         m_eyebrowsControl->setRightRotationDegrees(m_rightEyebrowController->rotation());
     });
 
-    //MOUTH
+    //MOUTH:
     connect(m_mouthController, &SliderController::sliderPositionChanged, m_mouthControl, [this](){
 
         m_mouthControl->setPositionDegrees(m_mouthController->sliderPosition());
     });
+
+    //EMOTIONS:
+    m_emotionsControl->setEmotionsController(m_emotionsButtonGradeController);
+    m_emotionsControl->setEyesControl(m_eyesControl);
+    m_emotionsControl->setEyelidsControl(m_eyelidsControl);
+    m_emotionsControl->setEyebrowsControl(m_eyebrowsControl);
+    m_emotionsControl->setMouthControl(m_mouthControl);
 }
 
 JoystickController *AnimatronicControl::eyesController() const

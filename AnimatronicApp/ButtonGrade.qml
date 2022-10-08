@@ -12,7 +12,7 @@ Column{
         CheckBox{
             id: emotionNeutralButton
             checked: controller.ui_neutralEmotionChecked
-            onClicked: controller.onNeutralEmotionPressed
+            onClicked: controller.onNeutralEmotionPressed()
 
             Text{
                 anchors.left: parent.right
@@ -24,7 +24,7 @@ Column{
         CheckBox{
             id: emotionHappyButton
             checked: controller.ui_happyEmotionChecked
-            onClicked: controller.onHappyEmotionPressed
+            onClicked: controller.onHappyEmotionPressed()
 
             Text{
                 anchors.left: parent.right
@@ -36,7 +36,7 @@ Column{
         CheckBox{
             id: emotionScaredButton
             checked: controller.ui_scaredEmotionChecked
-            onClicked: controller.onScaredEmotionPressed
+            onClicked: controller.onScaredEmotionPressed()
 
             Text{
                 anchors.left: parent.right
@@ -53,7 +53,7 @@ Column{
         CheckBox{
             id: emotionAngryButton
             checked: controller.ui_angryEmotionChecked
-            onClicked: controller.onAngryEmotionPressed
+            onClicked: controller.onAngryEmotionPressed()
 
             Text{
                 anchors.left: parent.right
@@ -65,7 +65,7 @@ Column{
         CheckBox{
             id: emotionSleepyButton
             checked: controller.ui_sleepyEmotionChecked
-            onClicked: controller.onSleepyEmotionPressed
+            onClicked: controller.onSleepyEmotionPressed()
 
             Text{
                 anchors.left: parent.right
@@ -77,7 +77,7 @@ Column{
         CheckBox{
             id: emotionSuspiciousButton
             checked: controller.ui_suspiciousEmotionChecked
-            onClicked: controller.onSuspiciousEmotionPressed
+            onClicked: controller.onSuspiciousEmotionPressed()
 
             Text{
                 anchors.left: parent.right

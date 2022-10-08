@@ -51,7 +51,7 @@ void EmotionsButtonGradeController::onNeutralEmotionPressed()
 void EmotionsButtonGradeController::onHappyEmotionPressed()
 {
     clearCheckedButtons();
-    m_emotionButtonsStates.insert("neutral", true);
+    m_emotionButtonsStates.insert("happy", true);
     emit emotionButtonsCheckedChanged();
 }
 

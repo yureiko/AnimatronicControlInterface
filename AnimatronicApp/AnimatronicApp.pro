@@ -12,6 +12,7 @@ HEADERS += \
     Controllers/slidercontroller.h \
     Controllers/toolbarcontroller.h \
     Models/animatroniccontrol.h \
+    Models/emotionscontrol.h \
     Models/eyebrowscontrol.h \
     Models/eyelidscontrol.h \
     Models/eyescontrol.h \
@@ -25,6 +26,7 @@ SOURCES += \
     Controllers/slidercontroller.cpp \
     Controllers/toolbarcontroller.cpp \
     Models/animatroniccontrol.cpp \
+    Models/emotionscontrol.cpp \
     Models/eyebrowscontrol.cpp \
     Models/eyelidscontrol.cpp \
     Models/eyescontrol.cpp \

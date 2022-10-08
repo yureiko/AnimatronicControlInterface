@@ -20,7 +20,7 @@ qreal EyebrowsControl::leftRotationDegrees() const
 
 void EyebrowsControl::setLeftRotationDegrees(qreal rotation)
 {
-    qreal rotationDegrees = 2*rotation;
+    qreal rotationDegrees = rotation;
 
     if(rotationDegrees > MAX_ROTATION_DEG_VALUE)
     {
@@ -47,7 +47,7 @@ QPair<float, float> EyebrowsControl::positionDegrees()
 
 void EyebrowsControl::setRightRotationDegrees(qreal rotation)
 {
-    qreal rotationDegrees = 2*rotation;
+    qreal rotationDegrees = rotation;
 
     if(rotationDegrees > MAX_ROTATION_DEG_VALUE)
     {

@@ -94,7 +94,7 @@ Window {
         Slider {
             id: eyelidsSlider
             orientation: Qt.Vertical
-            value: 0.0
+            value: 0.5
 
             anchors{
                 top: superiorEyelidsSlider.top

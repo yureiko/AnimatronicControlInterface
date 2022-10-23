@@ -91,6 +91,8 @@ AnimatronicControl::AnimatronicControl(QObject *parent)
     m_emotionsControl->setEyelidsControl(m_eyelidsControl);
     m_emotionsControl->setEyebrowsControl(m_eyebrowsControl);
     m_emotionsControl->setMouthControl(m_mouthControl);
+
+    m_eyesControl->setPositionDegrees({0.f,0.f});
 }
 
 JoystickController *AnimatronicControl::eyesController() const

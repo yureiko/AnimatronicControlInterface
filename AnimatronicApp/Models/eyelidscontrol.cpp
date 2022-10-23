@@ -9,7 +9,7 @@
 
 EyelidsControl::EyelidsControl(QObject *parent)
     : QObject(parent),
-      m_positionDegrees({SUPERIOR_MAX_DEG_VALUE/2, INFERIOR_MAX_DEG_VALUE/2}),
+      m_positionDegrees({SUPERIOR_MAX_DEG_VALUE*0.7, INFERIOR_MAX_DEG_VALUE*0.7}),
       m_positionCenterOffsetDegrees({0.f,0.f}),
       m_blinkTimer(new QTimer(this)),
       m_isBlinking(true)

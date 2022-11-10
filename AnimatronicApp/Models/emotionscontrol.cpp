@@ -60,10 +60,6 @@ void EmotionsControl::onEmotionChanged()
     {
         startSuspiciousEmotion();
     }
-    else
-    {
-        stopEmotion();
-    }
 }
 
 void EmotionsControl::startNeutralEmotion()
@@ -118,9 +114,4 @@ void EmotionsControl::startSuspiciousEmotion()
     m_eyebrowsControl->setLeftRotationDegrees(20.f);
     m_eyebrowsControl->setRightRotationDegrees(-20.f);
     m_mouthControl->setPositionDegrees(1.0f);
-}
-
-void EmotionsControl::stopEmotion()
-{
-
 }

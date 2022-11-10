@@ -23,8 +23,21 @@ Window {
         border.width: 1
         color: "orange"
 
+        /****** TOOL BAR ********************************************/
         CustomToolbar {
             id: toolbar
+        }
+
+        /****** TITLE: *********************************************/
+
+        Text{
+            anchors.top: toolbar.bottom
+            anchors.topMargin: 32
+            anchors.horizontalCenter: centerEyesReference.horizontalCenter
+            text: qsTr("NICK")
+            color: "white"
+            font.pixelSize: 48
+            font.bold: true
         }
 
         /****** EYES: ***********************************************/
@@ -111,10 +124,12 @@ Window {
         Text {
             id: eyelidsDescription
             text: qsTr("Pálpebras")
+            font.pixelSize: 14
+
             anchors{
                 bottom: superiorEyelidsSlider.top
                 left: superiorEyelidsSlider.left
-                leftMargin: 16
+                leftMargin: 10
             }
         }
 
@@ -223,6 +238,7 @@ Window {
         Text {
             id: mouthDescription
             text: qsTr("Boca")
+            font.pixelSize: 14
             anchors{
                 bottom: mouthSlider.top
                 horizontalCenter: mouthSlider.horizontalCenter
@@ -272,6 +288,7 @@ Window {
             width: eyeJoystickRight.width - inferiorEyelidsSlider.value * eyeJoystickRight.size/6
             rotation: 180
         }
+
         /****** EMOTIONS CONTROL: **********************************/
 
         ButtonGrade {

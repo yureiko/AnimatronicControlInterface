@@ -18,6 +18,7 @@ Column{
                 anchors.left: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Neutro")
+                font.pixelSize: 14
             }
         }
 
@@ -30,6 +31,7 @@ Column{
                 anchors.left: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Feliz")
+                font.pixelSize: 14
             }
         }
 
@@ -42,6 +44,7 @@ Column{
                 anchors.left: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Assustado")
+                font.pixelSize: 14
             }
         }
     }
@@ -59,6 +62,7 @@ Column{
                 anchors.left: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Bravo")
+                font.pixelSize: 14
             }
         }
 
@@ -71,6 +75,7 @@ Column{
                 anchors.left: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Sonolento")
+                font.pixelSize: 14
             }
         }
 
@@ -83,6 +88,7 @@ Column{
                 anchors.left: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Desconfiado")
+                font.pixelSize: 14
             }
         }
     }

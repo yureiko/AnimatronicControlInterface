@@ -39,8 +39,6 @@ private:
 
     void startSuspiciousEmotion();
 
-    void stopEmotion();
-
     EyesControl *m_eyesControl;
     EyelidsControl *m_eyelidsControl;
     EyebrowsControl *m_eyebrowsControl;

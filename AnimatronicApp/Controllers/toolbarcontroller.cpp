@@ -3,7 +3,7 @@
 ToolBarController::ToolBarController(QObject *parent)
     : QObject(parent),
       m_bluetoothDeviceDiscoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
-      m_serialPortOpenButtonText("Open"),
+      m_serialPortOpenButtonText("Conectar"),
       m_isSerialPortOpen(false),
       m_btEnabled(true),
       m_btConnectionCheckBoxEnabled(true),
@@ -127,7 +127,7 @@ void ToolBarController::setIsSerialPortOpen(bool newIsSerialPortOpen)
     {
         m_isSerialPortOpen = newIsSerialPortOpen;
 
-        m_serialPortOpenButtonText = m_isSerialPortOpen ? "Close" : "Open";
+        m_serialPortOpenButtonText = m_isSerialPortOpen ? "Desconectar" : "Conectar";
 
         emit serialPortOpenButtonTextChanged();
     }

@@ -74,7 +74,7 @@ void EmotionsControl::startNeutralEmotion()
 void EmotionsControl::startHappyEmotion()
 {
     m_eyesControl->setPositionDegrees({0.f, 0.f});
-    m_eyelidsControl->setPositionDegrees({0.9f, 0.9f});
+    m_eyelidsControl->setPositionDegrees({0.9f, 0.6f});
     m_eyebrowsControl->setLeftRotationDegrees(-8.f);
     m_eyebrowsControl->setRightRotationDegrees(-8.f);
     m_mouthControl->setPositionDegrees(0.8f);
@@ -83,7 +83,7 @@ void EmotionsControl::startHappyEmotion()
 void EmotionsControl::startScaredEmotion()
 {
     m_eyesControl->setPositionDegrees({0.f, 0.f});
-    m_eyelidsControl->setPositionDegrees({1.0f, 0.7f});
+    m_eyelidsControl->setPositionDegrees({1.0f, 1.0f});
     m_eyebrowsControl->setLeftRotationDegrees(-20.f);
     m_eyebrowsControl->setRightRotationDegrees(-20.f);
     m_mouthControl->setPositionDegrees(0.2f);
@@ -92,7 +92,7 @@ void EmotionsControl::startScaredEmotion()
 void EmotionsControl::startAngryEmotion()
 {
     m_eyesControl->setPositionDegrees({0.f, 0.5f});
-    m_eyelidsControl->setPositionDegrees({0.3f, 0.9f});
+    m_eyelidsControl->setPositionDegrees({0.5f, 0.9f});
     m_eyebrowsControl->setLeftRotationDegrees(20.f);
     m_eyebrowsControl->setRightRotationDegrees(20.f);
     m_mouthControl->setPositionDegrees(1.0f);
@@ -101,7 +101,7 @@ void EmotionsControl::startAngryEmotion()
 void EmotionsControl::startSleepyEmotion()
 {
     m_eyesControl->setPositionDegrees({0.f, 0.9f});
-    m_eyelidsControl->setPositionDegrees({0.3f, 0.9f});
+    m_eyelidsControl->setPositionDegrees({0.5f, 0.8f});
     m_eyebrowsControl->setLeftRotationDegrees(-10.f);
     m_eyebrowsControl->setRightRotationDegrees(-10.f);
     m_mouthControl->setPositionDegrees(0.0f);

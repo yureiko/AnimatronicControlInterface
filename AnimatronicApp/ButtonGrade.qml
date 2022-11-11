@@ -5,12 +5,17 @@ import controllers 1.0
 
 Column{
     property var controller
+    property int size: 48
+    property int fontSize: 0.7 * size
     Row{
         id: emotionsButtons
-        spacing: 64
+        spacing: 64 + 1.5 * size
 
         CheckBox{
             id: emotionNeutralButton
+
+            indicator.width: size
+            indicator.height: size
             checked: controller.ui_neutralEmotionChecked
             onClicked: controller.onNeutralEmotionPressed()
 
@@ -18,12 +23,15 @@ Column{
                 anchors.left: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Neutro")
-                font.pixelSize: 14
+                font.pixelSize: fontSize
             }
         }
 
         CheckBox{
             id: emotionHappyButton
+
+            indicator.width: size
+            indicator.height: size
             checked: controller.ui_happyEmotionChecked
             onClicked: controller.onHappyEmotionPressed()
 
@@ -31,12 +39,15 @@ Column{
                 anchors.left: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Feliz")
-                font.pixelSize: 14
+                font.pixelSize: fontSize
             }
         }
 
         CheckBox{
             id: emotionScaredButton
+
+            indicator.width: size
+            indicator.height: size
             checked: controller.ui_scaredEmotionChecked
             onClicked: controller.onScaredEmotionPressed()
 
@@ -44,17 +55,20 @@ Column{
                 anchors.left: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Assustado")
-                font.pixelSize: 14
+                font.pixelSize: fontSize
             }
         }
     }
 
     Row{
         id: emotionsButtons2
-        spacing: 64
+        spacing: 64 + 1.5 * size
 
         CheckBox{
             id: emotionAngryButton
+
+            indicator.width: size
+            indicator.height: size
             checked: controller.ui_angryEmotionChecked
             onClicked: controller.onAngryEmotionPressed()
 
@@ -62,12 +76,15 @@ Column{
                 anchors.left: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Bravo")
-                font.pixelSize: 14
+                font.pixelSize: fontSize
             }
         }
 
         CheckBox{
             id: emotionSleepyButton
+
+            indicator.width: size
+            indicator.height: size
             checked: controller.ui_sleepyEmotionChecked
             onClicked: controller.onSleepyEmotionPressed()
 
@@ -75,12 +92,15 @@ Column{
                 anchors.left: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Sonolento")
-                font.pixelSize: 14
+                font.pixelSize: fontSize
             }
         }
 
         CheckBox{
             id: emotionSuspiciousButton
+
+            indicator.width: size
+            indicator.height: size
             checked: controller.ui_suspiciousEmotionChecked
             onClicked: controller.onSuspiciousEmotionPressed()
 
@@ -88,7 +108,7 @@ Column{
                 anchors.left: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Desconfiado")
-                font.pixelSize: 14
+                font.pixelSize: fontSize
             }
         }
     }

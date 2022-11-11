@@ -26,17 +26,18 @@ Window {
         /****** TOOL BAR ********************************************/
         CustomToolbar {
             id: toolbar
+            height: parent.width /10
         }
 
         /****** TITLE: *********************************************/
 
         Text{
             anchors.top: toolbar.bottom
-            anchors.topMargin: 32
+            anchors.topMargin: parent.width/10
             anchors.horizontalCenter: centerEyesReference.horizontalCenter
             text: qsTr("NICK")
             color: "white"
-            font.pixelSize: 48
+            font.pixelSize: background.width / 10
             font.bold: true
         }
 
@@ -47,13 +48,13 @@ Window {
             backgroundColor: "white"
             anchors{
                 top: toolbar.bottom
-                topMargin: 180
+                topMargin: parent.width/2
                 left: background.left
-                leftMargin: 60
+                leftMargin: 40
 
             }
 
-            size: parent.width/4
+            size: parent.width * 0.27
             cursorImage: "qrc:/Resources/iris.png"
         }
 
@@ -113,6 +114,7 @@ Window {
                 top: superiorEyelidsSlider.top
                 bottom: inferiorEyelidsSlider.bottom
                 left: superiorEyelidsSlider.right
+                leftMargin: parent.width * 0.02
             }
             stepSize: 0.01
             onMoved: {
@@ -124,7 +126,7 @@ Window {
         Text {
             id: eyelidsDescription
             text: qsTr("Pálpebras")
-            font.pixelSize: 14
+            font.pixelSize: 0.7 * background.width / 18
 
             anchors{
                 bottom: superiorEyelidsSlider.top
@@ -193,7 +195,7 @@ Window {
             Image {
                 id: snoutImage
                 anchors.fill: parent
-                source: "qrc:/Resources/snout.svg"
+                source: "qrc:/Resources/snout.png"
             }
         }
 
@@ -213,7 +215,7 @@ Window {
             Image {
                 id: mouthImage
                 anchors.fill: parent
-                source: "qrc:/Resources/mouth.svg"
+                source: "qrc:/Resources/mouth.png"
             }
         }
 
@@ -238,7 +240,7 @@ Window {
         Text {
             id: mouthDescription
             text: qsTr("Boca")
-            font.pixelSize: 14
+            font.pixelSize:  0.7 * background.width / 18
             anchors{
                 bottom: mouthSlider.top
                 horizontalCenter: mouthSlider.horizontalCenter
@@ -248,7 +250,7 @@ Window {
         /****** EYELIDS ANIMATION: **********************************/
         Image{
             id: leftSuperiorEyelidAnimation
-            source: "qrc:/Resources/eyelidClosed100.svg"
+            source: "qrc:/Resources/eyelidClosed100.png"
             anchors{
                 top: eyeJoystickLeft.top
                 horizontalCenter: eyeJoystickLeft.horizontalCenter
@@ -258,7 +260,7 @@ Window {
         }
         Image{
             id: rightSuperiorEyelidAnimation
-            source: "qrc:/Resources/eyelidClosed100.svg"
+            source: "qrc:/Resources/eyelidClosed100.png"
             anchors{
                 top: eyeJoystickRight.top
                 horizontalCenter: eyeJoystickRight.horizontalCenter
@@ -268,7 +270,7 @@ Window {
         }
         Image{
             id: leftInferiorEyelidAnimation
-            source: "qrc:/Resources/eyelidClosed100.svg"
+            source: "qrc:/Resources/eyelidClosed100.png"
             anchors{
                 bottom: eyeJoystickLeft.bottom
                 horizontalCenter: eyeJoystickLeft.horizontalCenter
@@ -279,7 +281,7 @@ Window {
         }
         Image{
             id: rightInferiorEyelidAnimation
-            source: "qrc:/Resources/eyelidClosed100.svg"
+            source: "qrc:/Resources/eyelidClosed100.png"
             anchors{
                 bottom: eyeJoystickRight.bottom
                 horizontalCenter: eyeJoystickRight.horizontalCenter
@@ -292,11 +294,12 @@ Window {
         /****** EMOTIONS CONTROL: **********************************/
 
         ButtonGrade {
-            spacing: 16
+            size: background.width / 18
+            spacing: 64 + size
             anchors{
                 horizontalCenter: snout.horizontalCenter
                 top: snout.bottom
-                topMargin: 100
+                topMargin: background.width/3
             }
             controller: emotionsButtonGradeController
         }

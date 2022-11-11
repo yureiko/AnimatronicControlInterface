@@ -1,6 +1,7 @@
 QT += qml serialport bluetooth
 
-CONFIG += c++11
+CONFIG += c++11 \
+      no_batch
 
 RESOURCES += \
     animatronic-images.qrc \
@@ -34,3 +35,6 @@ SOURCES += \
     Threads/communicationthread.cpp \
     Controllers/joystickcontroller.cpp \
     main.cpp
+
+target.path = $$[QT_INSTALL_EXAMPLES]/nick/nickApp
+INSTALLS += target

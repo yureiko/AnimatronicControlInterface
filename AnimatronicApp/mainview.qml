@@ -4,7 +4,7 @@ import QtQuick.Controls 2.15
 import controllers 1.0
 
 Window {
-    property real proportion: 16/9
+    property real proportion: 21/9
 
     id: window
     visible: true
@@ -83,7 +83,7 @@ Window {
                 top: eyeJoystickRight.top
                 bottom: eyeJoystickRight.verticalCenter
                 left: eyeJoystickRight.right
-                leftMargin: eyeJoystickRight.size/8
+                leftMargin: eyeJoystickRight.size/7
             }
             stepSize: 0.01
             onMoved: superiorEyelidsController.onPositionChanged(position)
@@ -98,7 +98,7 @@ Window {
             anchors{
                 top: superiorEyelidsSlider.bottom
                 left: eyeJoystickRight.right
-                leftMargin: eyeJoystickRight.size/8
+                leftMargin: eyeJoystickRight.size/7
             }
             height: superiorEyelidsSlider.height
             stepSize: 0.01
@@ -114,7 +114,7 @@ Window {
                 top: superiorEyelidsSlider.top
                 bottom: inferiorEyelidsSlider.bottom
                 left: superiorEyelidsSlider.right
-                leftMargin: parent.width * 0.02
+                leftMargin: parent.width * 0.05
             }
             stepSize: 0.01
             onMoved: {
@@ -295,7 +295,7 @@ Window {
 
         ButtonGrade {
             size: background.width / 18
-            spacing: 64 + size
+            spacing: size * 0.8
             anchors{
                 horizontalCenter: snout.horizontalCenter
                 top: snout.bottom

@@ -33,7 +33,7 @@ Rectangle {
 
     function leverPositionChanged()
     {
-        var position = [((2 * mouseArea.mouseX)/mouseArea.width - 1), -((2 * mouseArea.mouseY)/mouseArea.height - 1)]
+        var position = [((2 * mouseArea.mouseX)/mouseArea.width - 1), -((10 * mouseArea.mouseY)/mouseArea.height - 1)]
 
         controller.setRotation(position)
     }

@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Resources/iris.png</file>
+        <file>Resources/snout.png</file>
+        <file>Resources/mouth.png</file>
+        <file>Resources/eyebrow.png</file>
+        <file>Resources/eyelidClosed100.png</file>
+
+    </qresource>
+</RCC>

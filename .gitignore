@@ -1,2 +1,18 @@
 
 AnimatronicApp/AnimatronicApp.pro.user
+
+build-AnimatronicApp-Desktop_Qt_5_15_2_GCC_64bit-Debug/
+
+*.idx
+
+build-AnimatronicApp-Unnamed-Debug/.qtc_clangd/
+
+<<<<<<< HEAD
+build-AnimatronicApp-Android_Qt_5_15_0_Clang_Multi_Abi-Release/
+
+build-AnimatronicApp-Android_Qt_5_15_0_Clang_Multi_Abi-Debug/
+=======
+build-AnimatronicApp-Android_Qt_5_15_0_Clang_Multi_Abi-Debug/
+
+build-AnimatronicApp-Android_Qt_5_15_0_Clang_Multi_Abi-Release/
+>>>>>>> dev

@@ -1,0 +1,106 @@
+@startuml
+
+class AnimatronicControl
+{
+    +JoystickController *eyesController()
+    +SliderController *superiorEyelidsController()
+    +SliderController *inferiorEyelidsController()
+    +LeverController *leftEyebrowController()
+    +LeverController *rightEyebrowController()
+    +SliderController *mouthController()
+
+    -void sendEyesPosition(QPointF eyesPosition)
+    -void sendEyelidsPosition(QPair<float,float> eyelidsPosition)
+    -void sendEyebrowsRotation(QPair<float, float> eyebrowsPosition)
+    -void sendMouthPosition(float mouthPosition)
+    -void sendPositions()
+    -void startCommunicationTimer()
+    -void stopCommunicationTimer()
+}
+
+class EyebrowsControl
+{
+    +qreal leftRotationDegrees()
+    +qreal rightRotationDegrees()
+    +QPair<float, float> positionDegrees()
+
+    +**SLOT** void setLeftRotationDegrees(qreal rotation)
+    +**SLOT** void setRightRotationDegrees(qreal rotation)
+    +**SIGNAL** void rotationDegreesChanged(qreal rotation)
+}
+
+class EyelidsControl
+{
+    +QPair<float,float> positionDegrees()
+    +void setPositionCenterYOffsetDegrees(float yOffset)
+
+    +**SLOT** void setPositionDegrees(QPair<float,float> newPosition)
+    +**SIGNAL** void positionDegreesChanged(QPair<float,float> positionDegrees)
+
+    -void blink();
+}
+
+class EyesControl
+{
+    +QPointF positionDegrees()
+
+    +**SLOT** void setPositionDegrees(QPointF newPosition)
+    +**SLOT** void positionDegreesChanged(QPointF positionDegrees)
+}
+
+class MouthControl
+{
+    +float positionDegrees()
+
+    +**SIGNAL** void positionDegreesChanged(float positionDegrees)
+    +**SLOT** void setPositionDegrees(float newPosition)
+
+    -void breathe()
+}
+
+class CommunicationThread
+{
+    +void sendData(QByteArray data)
+
+    +**SLOT** void openSerialPort(QString portName)
+    +**SLOT**void closeSerialPort()
+    +**SIGNAL** void serialPortOpened()
+    +**SIGNAL** void serialPortClosed()
+}
+
+class JoystickController
+{
+    +QPointF joystickPosition()
+
+    +**SLOT** void setJoystickPosition(QVariantList newJoystickPosition)
+    +**SIGNAL** void joystickPositionChanged()
+}
+
+class SliderController
+{
+    +float sliderPosition()
+
+    +**SIGNAL** void sliderPositionChanged()
+    +**SLOT Q_INVOKABLE** void onPositionChanged(float position)
+}
+
+class LeverController
+{
+    +qreal rotation()
+
+    +**SLOT** void setRotation(QVariantList newPosition)
+    +**SIGNAL** void rotationChanged()
+}
+
+AnimatronicControl *-- EyebrowsControl
+AnimatronicControl *--- EyelidsControl
+AnimatronicControl *-- EyesControl
+AnimatronicControl *--- MouthControl
+AnimatronicControl *-- CommunicationThread
+
+AnimatronicControl *--- JoystickController
+AnimatronicControl *-- SliderController
+AnimatronicControl *--- LeverController
+
+
+@enduml

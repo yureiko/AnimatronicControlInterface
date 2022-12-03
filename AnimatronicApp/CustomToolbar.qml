@@ -22,8 +22,9 @@ Rectangle {
             leftMargin: 5
             left: parent.left
             top: parent.top
+            bottom: parent.bottom
         }
-        width: 100
+        width: height * 3
 
         model: toolbarController.ui_availablePortsList
     }
@@ -31,11 +32,32 @@ Rectangle {
     Button{
         id: serialPortOpenButton
         anchors{
+            top: parent.top
             left: serialPortSelect.right
-            leftMargin: 10
+            leftMargin: height/30
+            bottom: parent.bottom
         }
         text: toolbarController.ui_serialPortOpenButtonText
 
-        onClicked: toolbarController.onOpenSerialPortPressed(serialPortSelect.currentIndex);
+        onClicked: toolbarController.onOpenSerialPortPressed(serialPortSelect.currentIndex)
+    }
+
+    CheckBox{
+        id: btEnabled
+
+        indicator.width: parent.height * 0.7
+        indicator.height: parent.height * 0.7
+
+        enabled: toolbarController.ui_btConnectionCheckBoxEnabled
+
+        anchors{
+            left: serialPortOpenButton.right
+            verticalCenter: parent.verticalCenter
+        }
+
+        text: qsTr("Conexão bluetooth")
+        checked: true
+
+        onClicked: toolbarController.onBTEnabledPressed(checked);
     }
 }

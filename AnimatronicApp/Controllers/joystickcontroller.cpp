@@ -4,7 +4,7 @@
 
 JoystickController::JoystickController(QObject *parent)
     : QObject(parent),
-      m_joystickPosition(QPointF())
+      m_joystickPosition(QPointF(0.f,0.f))
 {
 
 }
@@ -28,6 +28,4 @@ void JoystickController::setJoystickPosition(QVariantList newJoystickPosition)
     }
 
     emit joystickPositionChanged();
-
-    qDebug() << "pos: " << m_joystickPosition;
 }

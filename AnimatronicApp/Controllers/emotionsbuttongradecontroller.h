@@ -4,6 +4,9 @@
 #include <QHash>
 #include <QObject>
 
+/**
+ * @brief The EmotionsButtonGradeController class provides a controller for button grade view
+ */
 class EmotionsButtonGradeController : public QObject
 {
     Q_OBJECT
@@ -15,26 +18,85 @@ class EmotionsButtonGradeController : public QObject
     Q_PROPERTY(bool ui_suspiciousEmotionChecked READ suspiciousEmotionChecked NOTIFY emotionButtonsCheckedChanged)
 
 public:
+    /**
+     * @brief EmotionsButtonGradeController constructor
+     * @param parent
+     */
     explicit EmotionsButtonGradeController(QObject *parent = nullptr);
 
+    /**
+     * @brief return neutral emotion checked state
+     * @return bool
+     */
     bool neutralEmotionChecked() const;
+
+    /**
+     * @brief return happy emotion checked state
+     * @return bool
+     */
     bool happyEmotionChecked() const;
+
+    /**
+     * @brief return scared emotion checked state
+     * @return bool
+     */
     bool scaredEmotionChecked() const;
+
+    /**
+     * @brief return angry emotion checked state
+     * @return bool
+     */
     bool angryEmotionChecked() const;
+
+    /**
+     * @brief return sleepy emotion checked state
+     * @return bool
+     */
     bool sleepyEmotionChecked() const;
+
+    /**
+     * @brief return suspicious emotion checked state
+     * @return bool
+     */
     bool suspiciousEmotionChecked() const;
 
 signals:
 
+    /**
+     * @brief emotionButtonsCheckedChanged
+     */
     void emotionButtonsCheckedChanged();
 
 public slots:
 
+    /**
+     * @brief Process neutral emotion pressed
+     */
     void onNeutralEmotionPressed();
+
+    /**
+     * @brief Process happy emotion pressed
+     */
     void onHappyEmotionPressed();
+
+    /**
+     * @brief Process scared emotion pressed
+     */
     void onScaredEmotionPressed();
+
+    /**
+     * @brief Process angry emotion pressed
+     */
     void onAngryEmotionPressed();
+
+    /**
+     * @brief Process sleepy emotion pressed
+     */
     void onSleepyEmotionPressed();
+
+    /**
+     * @brief Process suspicious emotion pressed
+     */
     void onSuspiciousEmotionPressed();
 
 private:

@@ -1,3 +1,11 @@
+/**
+ * This file is part of Animatronic Control project which is released under GPLv3 license.
+ * See file LICENSE.txt or go to https://www.gnu.org/licenses/gpl-3.0.txt for full license details.
+ *
+ * Author: Yuri Andreiko
+ * Year: 2022
+ */
+
 #include "animatroniccontrol.h"
 
 #define MOVE_EYES_MESSAGE_ID 0x04
